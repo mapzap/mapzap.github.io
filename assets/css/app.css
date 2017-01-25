@@ -1,0 +1,72 @@
+html, body {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+body {
+  padding-top: 50px;
+}
+#loading-mask {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+#map-container {
+  height: 45%;
+  padding: 0;
+}
+#map {
+  height: 100%;
+}
+#table-container {
+  height: 55%;
+  padding: 5px;
+  position: relative;
+  box-shadow: inset 0 8px 8px -8px #696868;
+}
+#table tr {
+  cursor: pointer;
+}
+#feature-info table tr td {
+  word-break: break-all;
+  word-break: break-word;
+  -webkit-hyphens: auto;
+    hyphens: auto;
+}
+.bootstrap-table {
+  margin-top: -4px;
+}
+.loading-indicator {
+  position: absolute;
+  width: 220px;
+  height: 19px;
+  top: 50%;
+  left: 50%;
+  margin: -10px 0 0 -110px;
+  z-index: 20001;
+}
+.loading-bar {
+  width: 100%;
+}
+.navbar .navbar-brand {
+  font-weight: bold;
+  font-size: 25px;
+  color: white;
+}
+.navbar-brand img {
+  height: 100%;
+  margin-top: -5px;
+  margin-right: 15px;
+  display: inline;
+}
+.white {
+  color: white;
+}
+@media (max-width: 992px) {
+  .navbar .navbar-brand {
+    font-size: 18px;
+  }
+}
+@media print {
+  .navbar {
+    display: none !important;
+  }
+}

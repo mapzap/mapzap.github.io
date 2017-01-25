@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="description" content="A highly configurable, responsive web mapping application.">
+    <meta name="author" content="Bryan McBride">
+    <title name="title">Share Maps</title>
+    <link rel="stylesheet" href="assets/vendor/bootstrap-3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/vendor/bootstrap-table-1.11.0/bootstrap-table.min.css">
+    <link rel="stylesheet" href="assets/css/app.css">
+    <link rel="icon" type="image/x-icon" name="icon" href="assets/img/favicon.ico">
+    <link rel="icon" sizes="196x196" name="icon" href="assets/img/favicon-196.png">
+    <link rel="apple-touch-icon" sizes="76x76" name="icon" href="assets/img/favicon-76.png">
+    <link rel="apple-touch-icon" sizes="120x120" name="icon" href="assets/img/favicon-120.png">
+    <link rel="apple-touch-icon" sizes="152x152" name="icon" href="assets/img/favicon-152.png">
+  </head>
+
+  <body>
+    <div class="modal-backdrop" id="loading-mask" >
+      <div class="loading-indicator">
+        <div class="progress progress-striped active">
+          <div class="progress-bar progress-bar-info loading-bar"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <span class="navbar-brand" name="title" id="navbar-title">Share Maps</span>
+        </div>
+        <div class="navbar-collapse collapse">
+          <form class="navbar-form navbar-right" id="geocode-form">
+            <div class="input-group">
+              <input type="text" class="form-control" id="address-input" placeholder="Address">
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="button" id="geocode-btn"><i class="glyphicon glyphicon-search"></i></button>
+              </span>
+            </div>
+          </form>
+          <ul class="nav navbar-nav">
+            <li><a href="#" id="extent-btn" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="glyphicon glyphicon-globe white"></i>&nbsp;All Features</a></li>
+            <li><a href="#" id="download-btn" download="" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="glyphicon glyphicon-cloud-download white"></i>&nbsp;Download Data</a></li>
+            <li class="dropdown">
+              <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-th white" title="Switch map view"></i>&nbsp;<span id="view">Split View </span><b class="caret"></b></a>
+              <ul class="dropdown-menu" id="view-types">
+                <li><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" name="view" id="split-view-btn">Split View</a></li>
+                <li><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" name="view" id="map-view-btn">Map View</a></li>
+                <li><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" name="view" id="table-view-btn">Table View</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div id="map-container">
+      <div id="map"></div>
+    </div>
+
+    <div id="table-container">
+      <table id="table"></table>
+    </div>
+
+    <div class="modal fade" id="featureModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button class="close" type="button" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title text-primary" id="feature-title">Feature Info</h4>
+          </div>
+          <div class="modal-body" id="feature-info"></div>
+          <div class="modal-footer">
+            <div class="btn-group dropup pull-left">
+              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" id="share-btn">
+                <i class="glyphicon glyphicon-share"></i>&nbsp;Share&nbsp;<span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="#" target="_blank" id="share-hyperlink">Hyperlink</a></li>
+                <li><a href="#" target="_blank" id="share-twitter">Twitter</a></li>
+                <li><a href="#" target="_blank" id="share-facebook">Facebook</a></li>
+              </ul>
+            </div>
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyCZFBnhpFAvqY4TMeV-4jXpHrbaEUv4zT0"></script>
+    <script src="https://cdn.klokantech.com/maptilerlayer/v1/index.js"></script>
+    <script src="assets/vendor/jquery-2.2.4.min.js"></script>
+    <script src="assets/vendor/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script src="assets/vendor/bootstrap-table-1.11.0/bootstrap-table.min.js"></script>
+    <script src="assets/js/app.js"></script>
+  </body>
+</html>
