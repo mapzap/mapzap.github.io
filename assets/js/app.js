@@ -14,6 +14,7 @@ var app = {
     this.bindUIActions();
     this.loadURLparams();
     this.buildMap();
+    this.initLocationCtrl();
 
     $(window).resize(function () {
       $("#table").bootstrapTable("resetView", {
@@ -110,8 +111,6 @@ var app = {
       zoom: 14
     });
 
-    app.geoloccontrol = new klokantech.GeolocationControl(app.map, 17);
-
     app.selectedFeature = new google.maps.Data({
       map: app.map,
       style: {
@@ -179,6 +178,80 @@ var app = {
       app.clickFeature(event);
     });
 
+  },
+
+  initLocationCtrl: function() {
+    var locationMarker = new google.maps.Marker({
+      map: app.map,
+      clickable: false,
+      visible: false,
+      icon: {
+        path: google.maps.SymbolPath.CIRCLE,
+        scale: 6,
+        fillColor: "#3a84df",
+        fillOpacity: 0.9,
+        strokeColor: "#fff",
+        strokeWeight: 2
+      }
+    });
+
+    var locationCircle = new google.maps.Circle({
+      map: app.map,
+      clickable: false,
+      visible: false,
+      radius: 1,
+      strokeColor: "#3a84df",
+      strokeOpacity: 0.8,
+      strokeWeight: 0.5,
+      fillColor: "#3a84df",
+      fillOpacity: 0.10
+    });
+
+    var geolocationBtn = document.createElement("div");
+    geolocationBtn.id = "geolocationBtn";
+    geolocationBtn.style = "background-color:#fff;border:2px solid #fff;border-radius 3px;box-shadow:rgba(0,0,0,0.298039) 0 1px 4px -1px;margin-right:10px;cursor:pointer;border-radius:2px;padding:3px;";
+    geolocationBtn.index = 1;
+    var geolocationIcon = document.createElement("div");
+    geolocationIcon.id = "geolocationIcon";
+    geolocationIcon.style = "background-size:36px 18px;width:18px;height:18px;opacity:0.9;background-image:url(assets/img/geolocation.png);";
+    geolocationBtn.appendChild(geolocationIcon);
+
+    var watchId;
+    google.maps.event.addDomListener(geolocationBtn, "click", function() {
+      if (navigator.geolocation) {
+        if (locationMarker.getVisible()) {
+          locationMarker.setVisible(false);
+          locationCircle.setVisible(false);
+          navigator.geolocation.clearWatch(watchId);
+          geolocationIcon.style.backgroundPosition = "";
+        } else {
+          locationMarker.setVisible(true);
+          locationCircle.setVisible(true);
+          geolocationIcon.style.backgroundPosition = "-18px";
+          watchId = navigator.geolocation.watchPosition(locationUpdate, function() {
+            alert("Error: The Geolocation service failed.");
+            locationMarker.setVisible(false);
+            locationCircle.setVisible(false);
+          }, {
+            enableHighAccuracy: true,
+            maximumAge: 10000,
+            timeout: 10000
+          });
+        }
+      } else {
+        alert("Error: Your browser doesn't support geolocation.");
+      }
+    });
+
+    function locationUpdate(position){
+      var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+      locationMarker.setPosition(latLng);
+      locationCircle.setCenter(latLng);
+      locationCircle.setRadius(position.coords.accuracy);
+      app.map.fitBounds(locationCircle.getBounds());
+    }
+
+    app.map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(geolocationBtn);
   },
 
   clickFeature: function(event) {
