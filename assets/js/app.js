@@ -181,6 +181,8 @@ var app = {
   },
 
   initLocationCtrl: function() {
+    var watchId;
+
     var locationMarker = new google.maps.Marker({
       map: app.map,
       clickable: false,
@@ -211,12 +213,13 @@ var app = {
     geolocationBtn.id = "geolocationBtn";
     geolocationBtn.style = "background-color:#fff;border:2px solid #fff;border-radius 3px;box-shadow:rgba(0,0,0,0.298039) 0 1px 4px -1px;margin-right:10px;cursor:pointer;border-radius:2px;padding:3px;";
     geolocationBtn.index = 1;
+
     var geolocationIcon = document.createElement("div");
     geolocationIcon.id = "geolocationIcon";
     geolocationIcon.style = "background-size:36px 18px;width:18px;height:18px;opacity:0.9;background-image:url(assets/img/geolocation.png);";
+
     geolocationBtn.appendChild(geolocationIcon);
 
-    var watchId;
     google.maps.event.addDomListener(geolocationBtn, "click", function() {
       if (navigator.geolocation) {
         if (locationMarker.getVisible()) {
@@ -228,27 +231,32 @@ var app = {
           locationMarker.setVisible(true);
           locationCircle.setVisible(true);
           geolocationIcon.style.backgroundPosition = "-18px";
-          watchId = navigator.geolocation.watchPosition(locationUpdate, function() {
-            alert("Error: The Geolocation service failed.");
-            locationMarker.setVisible(false);
-            locationCircle.setVisible(false);
-          }, {
-            enableHighAccuracy: true,
-            maximumAge: 10000,
-            timeout: 10000
-          });
+          navigator.geolocation.getCurrentPosition(function(position){
+            var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+            locationMarker.setPosition(latLng);
+            locationCircle.setCenter(latLng);
+            locationCircle.setRadius(position.coords.accuracy);
+            app.map.fitBounds(locationCircle.getBounds());
+            watchId = navigator.geolocation.watchPosition(locationUpdate, geolocationError, {enableHighAccuracy: true});
+          }, geolocationError, {enableHighAccuracy: true});
+
         }
       } else {
         alert("Error: Your browser doesn't support geolocation.");
       }
     });
 
+    function geolocationError(error) {
+      alert("Error: " + error.message);
+      locationMarker.setVisible(false);
+      locationCircle.setVisible(false);
+    }
+
     function locationUpdate(position){
       var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
       locationMarker.setPosition(latLng);
       locationCircle.setCenter(latLng);
       locationCircle.setRadius(position.coords.accuracy);
-      app.map.fitBounds(locationCircle.getBounds());
     }
 
     app.map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(geolocationBtn);
