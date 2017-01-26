@@ -24,13 +24,13 @@ Mapps is a simple, lightweight tool for quickly standing up a basic web mapping 
 
 ### URL Parameters:
 
-| Parameter     | Options                  | Default       | Description                                              | Required |
-| ------------- | ------------------------ | ------------- | -------------------------------------------------------- | -------- |
-| _src_         | Web accessible GeoJSON   | NA            | URL to GeoJSON source                                    | True     |
-| _title_       | Any string               | GeoJSON Data  | navbar, app title                                        | False    |
-| _icon_        | Any accessible URL       | NA            | URL to a custom navbar icon                              | False    |
-| _fields_      | Any valid properties     | All           | Comma separated list of specific properties to show      | False    |
-| _sortfield_   | Any valid property       | NA            | Sort table by this column                                | False    |
-| _sortorder_   | asc / desc               | asc           | Column sort order                                        | False    |
-| _attribution_ | Any string               | NA            | Source attribution added to text in bottom right of map  | False    |
-| _style_       | Data.StyleOptions (JSON) | {"fillColor":"red","fillOpacity":0.2,"strokeColor":"red","strokeOpacity":1,"strokeWeight":2,"icon":{"path":0,"scale":5,"strokeColor":"black","strokeWeight":1,"fillColor":"red","fillOpacity":1}} | Feature styling per the [google.maps.Data.StyleOptions](https://developers.google.com/maps/documentation/javascript/3.exp/reference#Data.StyleOptions) object specification  | False    |
+| Parameter     | Options                  | Description                                             | Required | Default           |
+| ------------- | ------------------------ | ------------------------------------------------------- | -------- | ----------------- |
+| _src_         | Web accessible GeoJSON   | URL to GeoJSON source                                   | True     | NA                |
+| _title_       | Any string               | navbar, app title                                       | False    | Mapps Data Viewer |
+| _icon_        | Any accessible URL       | URL to a custom navbar icon                             | False    | NA                |
+| _fields_      | Any valid properties     | Comma separated list of specific properties to show     | False    | All               |
+| _sortfield_   | Any valid property       | Sort table by this column                               | False    | NA                |
+| _sortorder_   | asc / desc               | Column sort order                                       | False    | asc               |
+| _attribution_ | Any string               | Source attribution added to text in bottom right of map | False    | NA                |
+| _style_       | Data.StyleOptions (JSON) | Feature styling per the [google.maps.Data.StyleOptions](https://developers.google.com/maps/documentation/javascript/3.exp/reference#Data.StyleOptions) object specification | False | {"fillColor":"red","fillOpacity":0.2,"strokeColor":"red","strokeOpacity":1,"strokeWeight":2,"icon":{"path":0,"scale":5,"strokeColor":"black","strokeWeight":1,"fillColor":"red","fillOpacity":1}} |
