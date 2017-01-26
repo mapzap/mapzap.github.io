@@ -211,12 +211,12 @@ var app = {
 
     var geolocationBtn = document.createElement("div");
     geolocationBtn.id = "geolocationBtn";
-    geolocationBtn.style = "background-color:#fff;border:2px solid #fff;border-radius 3px;box-shadow:rgba(0,0,0,0.298039) 0 1px 4px -1px;margin-right:10px;cursor:pointer;border-radius:2px;padding:3px;";
+    geolocationBtn.style.cssText = "background-color:#fff;border:2px solid #fff;border-radius 3px;box-shadow:rgba(0,0,0,0.298039) 0 1px 4px -1px;margin-right:10px;cursor:pointer;border-radius:2px;padding:3px;";
     geolocationBtn.index = 1;
 
     var geolocationIcon = document.createElement("div");
     geolocationIcon.id = "geolocationIcon";
-    geolocationIcon.style = "background-size:36px 18px;width:18px;height:18px;opacity:0.9;background-image:url(assets/img/geolocation.png);";
+    geolocationIcon.style.cssText = "background-size:36px 18px;width:18px;height:18px;opacity:0.9;background-image:url(assets/img/geolocation.png);";
 
     geolocationBtn.appendChild(geolocationIcon);
 
@@ -239,7 +239,6 @@ var app = {
             app.map.fitBounds(locationCircle.getBounds());
             watchId = navigator.geolocation.watchPosition(locationUpdate, geolocationError, {enableHighAccuracy: true});
           }, geolocationError, {enableHighAccuracy: true});
-
         }
       } else {
         alert("Error: Your browser doesn't support geolocation.");
