@@ -20,16 +20,17 @@ Mapps is a simple, lightweight tool for quickly standing up a basic web mapping 
 - [US States](https://bmcbride.github.io/mapps/?src=https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_110m_admin_1_states_provinces_shp.geojson&icon=https://upload.wikimedia.org/wikipedia/en/thumb/a/a4/Flag_of_the_United_States.svg/320px-Flag_of_the_United_States.svg.png&fields=name,name_alt,adm1_code,region,wikipedia&sortfield=name&title=US%20States&attribution=States%20courtesy%20of%20geojson.xyz) Natural Earth _admin 1 states provinces shp_ data from [http://geojson.xyz/](http://geojson.xyz/)
 - [Football Clubs of Europe](https://bmcbride.github.io/mapps/?src=https://web.fulcrumapp.com/shares/82982e4c55707a34.geojson&fields=name,full_name,ground,league,city,state_province,country,photo&title=Football%20Clubs%20of%20Europe&sortfield=name&attribution=Courtesy%20of%20Coleman%20McCormick) A Fulcrum mapping project from [Coleman McCormick](https://github.com/colemanm/)
 - [NYC Coffee Shops](https://bmcbride.github.io/mapps/?src=https://api.tiles.mapbox.com/v3/mapbox.o11ipb8h/markers.geojson&fields=name,description&title=NYC%20Coffee%20Shops&sortfield=name&attribution=Courtesy%20of%20Mapbox) via [Mapbox](https://www.mapbox.com/blog/open-web-geojson/)
-- [Baseball Parks](https://bmcbride.github.io/mapps/?src=https://raw.githubusercontent.com/cageyjames/GeoJSON-Ballparks/master/ballparks.geojson&fields=Ballpark,Team,League,Class&title=GeoJSON%20Ballparks&sortfield=Ballpark&attribution=https://github.com/cageyjames/GeoJSON-Ballparks) A GeoJSON Ballpark mapping project from [James Fee](https://github.com/cageyjames/GeoJSON-Ballparks)
+- [Baseball Parks](https://bmcbride.github.io/mapps/?src=https://raw.githubusercontent.com/cageyjames/GeoJSON-Ballparks/master/ballparks.geojson&fields=Ballpark,Team,League,Class&title=GeoJSON%20Ballparks&sortfield=Ballpark&attribution=https://github.com/cageyjames/GeoJSON-Ballparks&style={%22icon%22:{%22path%22:0,%22scale%22:4,%22strokeColor%22:%22white%22,%22strokeWeight%22:1,%22fillColor%22:%22orange%22,%22fillOpacity%22:1}}) A GeoJSON Ballpark mapping project from [James Fee](https://github.com/cageyjames/GeoJSON-Ballparks)
 
 ### URL Parameters:
 
-| Parameter     | Options                 | Default       | Description                                              | Required |
-| ------------- | ----------------------- | ------------- | -------------------------------------------------------- | -------- |
-| _src_         | Web accessible GeoJSON  | NA            | URL to GeoJSON source                                    | True     |
-| _title_       | Any string              | GeoJSON Data  | navbar, app title                                        | False    |
-| _icon_        | Any accessible URL      | NA            | URL to a custom navbar icon                              | False    |
-| _fields_      | Any valid properties    | All           | Comma separated list of specific properties to show      | False    |
-| _sortfield_   | Any valid property      | NA            | Sort table by this column                                | False    |
-| _sortorder_   | asc / desc              | asc           | Column sort order                                        | False    |
-| _attribution_ | Any string              | NA            | Source attribution added to text in bottom right of map  | False    |
+| Parameter     | Options                  | Default       | Description                                              | Required |
+| ------------- | ------------------------ | ------------- | -------------------------------------------------------- | -------- |
+| _src_         | Web accessible GeoJSON   | NA            | URL to GeoJSON source                                    | True     |
+| _title_       | Any string               | GeoJSON Data  | navbar, app title                                        | False    |
+| _icon_        | Any accessible URL       | NA            | URL to a custom navbar icon                              | False    |
+| _fields_      | Any valid properties     | All           | Comma separated list of specific properties to show      | False    |
+| _sortfield_   | Any valid property       | NA            | Sort table by this column                                | False    |
+| _sortorder_   | asc / desc               | asc           | Column sort order                                        | False    |
+| _attribution_ | Any string               | NA            | Source attribution added to text in bottom right of map  | False    |
+| _style_       | Data.StyleOptions (JSON) | {"fillColor":"red","fillOpacity":0.2,"strokeColor":"red","strokeOpacity":1,"strokeWeight":2,"icon":{"path":0,"scale":5,"strokeColor":"black","strokeWeight":1,"fillColor":"red","fillOpacity":1}} | Feature styling per the [google.maps.Data.StyleOptions](https://developers.google.com/maps/documentation/javascript/3.exp/reference#Data.StyleOptions) object specification  | False    |
