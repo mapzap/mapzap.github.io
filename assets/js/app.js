@@ -103,12 +103,7 @@ var app = {
         featureType: "transit",
         elementType: "labels.icon",
         stylers: [{visibility: "off"}]
-      }],
-      center: {
-        lat:42.759349,
-        lng: -73.828833
-      },
-      zoom: 14
+      }]
     });
 
     app.selectedFeature = new google.maps.Data({
