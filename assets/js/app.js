@@ -303,7 +303,7 @@ var app = {
   },
 
   geocodeAddress: function(address) {
-    geocoder.geocode({"address": address}, function(results, status) {
+    app.geocoder.geocode({"address": address}, function(results, status) {
       if (status === "OK") {
         app.map.setCenter(results[0].geometry.location);
         app.map.setZoom(18);
