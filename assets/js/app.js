@@ -80,9 +80,9 @@ var app = {
       $("#loading-mask").hide();
     }
 
-    if (app.urlParams.logo && app.urlParams.logo.length > 0) {
-      $("#navbar-title").prepend("<img src='" + decodeURIComponent(app.urlParams.logo) + "'>");
-      $("[name=icon]").attr("href", decodeURIComponent(app.urlParams.logo));
+    if (app.urlParams.icon && app.urlParams.icon.length > 0) {
+      $("#navbar-title").prepend("<img src='" + decodeURIComponent(app.urlParams.icon) + "'>");
+      $("[name=icon]").attr("href", decodeURIComponent(app.urlParams.icon));
     }
 
     if (app.urlParams.fields) {
