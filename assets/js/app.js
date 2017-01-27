@@ -360,9 +360,11 @@ var app = {
     }).done(function() {
       // set global bounds
       app.map.data.forEach(function (feature) {
-        feature.getGeometry().forEachLatLng(function(latLng){
-          app.bounds.extend(latLng);
-        });
+        if (feature.getGeometry()) {
+          feature.getGeometry().forEachLatLng(function(latLng){
+            app.bounds.extend(latLng);
+          });  
+        }
       });
 
       // if feature id paramater present, zoom to feature
