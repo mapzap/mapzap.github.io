@@ -140,11 +140,11 @@ var app = {
         strokeWeight: 2,
         icon: {
           path: google.maps.SymbolPath.CIRCLE,
-          scale: 5,
-          strokeColor: "black",
-          strokeWeight: 1,
+          scale: 7,
+          strokeColor: "white",
+          strokeWeight: 2,
           fillColor: "red",
-          fillOpacity: 1
+          fillOpacity: 0.9
         }
       };
 
@@ -157,11 +157,11 @@ var app = {
           "strokeWeight": 2,
           "icon": {
             "path": 0,
-            "scale": 5,
-            "strokeColor": "black",
-            "strokeWeight": 1,
+            "scale": 7,
+            "strokeColor": "white",
+            "strokeWeight": 2,
             "fillColor": "red",
-            "fillOpacity": 1
+            "fillOpacity": 0.9
           }
         }*/
         style = JSON.parse(decodeURIComponent(app.urlParams.style));
@@ -363,7 +363,7 @@ var app = {
         if (feature.getGeometry()) {
           feature.getGeometry().forEachLatLng(function(latLng){
             app.bounds.extend(latLng);
-          });  
+          });
         }
       });
 
