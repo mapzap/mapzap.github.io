@@ -116,11 +116,11 @@ var app = {
         strokeWeight: 3,
         icon: {
           path: google.maps.SymbolPath.CIRCLE,
-          scale: 5,
-          strokeColor: "black",
-          strokeWeight: 1,
+          scale: 7,
+          strokeColor: "white",
+          strokeWeight: 2,
           fillColor: "#00ffff",
-          fillOpacity: 1
+          fillOpacity: 0.9
         }
       }
     });
