@@ -103,7 +103,9 @@ var app = {
         featureType: "transit",
         elementType: "labels.icon",
         stylers: [{visibility: "off"}]
-      }]
+      }],
+      zoomControl: false,
+      fullscreenControl: false
     });
 
     app.selectedFeature = new google.maps.Data({
