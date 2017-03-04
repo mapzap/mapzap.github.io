@@ -31,6 +31,9 @@ body {
   -webkit-hyphens: auto;
     hyphens: auto;
 }
+#feature-info table th {
+  vertical-align: middle;
+}
 .bootstrap-table {
   margin-top: -4px;
 }
