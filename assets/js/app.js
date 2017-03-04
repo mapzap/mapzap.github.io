@@ -429,6 +429,23 @@ var app = {
           app.map.getStreetView().setPosition(feature.getGeometry().get());
           app.map.getStreetView().setVisible(true);
         }
+      },
+      onSearch: function(text) {
+        var data = $("#table").bootstrapTable("getData");
+        var visibleIDs = data.map(function(feature) {
+          return (feature._id_);
+        });
+        app.map.data.forEach(function(feature) {
+          if ($.inArray(feature.getId(), visibleIDs) == -1) {
+            app.map.data.overrideStyle(feature, {
+              visible: false
+            });
+          } else {
+            app.map.data.overrideStyle(feature, {
+              visible: true
+            });
+          }
+        });
       }
     });
 
