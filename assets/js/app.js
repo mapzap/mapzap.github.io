@@ -273,14 +273,14 @@ var app = {
       $.each(app.userFields, function(index, prop) {
         val = app.formatProperty(event.feature.getProperty(prop));
         if (val) {
-          content += "<tr><th>" + prop + "</th><td>" + val + "</td></tr>";
+          content += "<tr><th>" + prop.toUpperCase() + "</th><td>" + val + "</td></tr>";
         }
       });
     } else {
       event.feature.forEachProperty(function(val, prop) {
         if (prop !== "_id_") {
           val = app.formatProperty(val);
-          content += "<tr><th>" + prop + "</th><td>" + val + "</td></tr>";
+          content += "<tr><th>" + prop.toUpperCase() + "</th><td>" + val + "</td></tr>";
         }
       });
     }
@@ -350,7 +350,7 @@ var app = {
       columns = columns.map(function(column) {
         return ({
           field: column,
-          title: column,
+          title: column.toUpperCase(),
           sortable: true,
           visible: (column == "_id_") ? false : true,
           formatter: app.formatProperty
