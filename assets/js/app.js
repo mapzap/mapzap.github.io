@@ -105,7 +105,8 @@ var app = {
         stylers: [{visibility: "off"}]
       }],
       zoomControl: false,
-      fullscreenControl: false
+      fullscreenControl: false,
+      mapTypeId: app.urlParams.map ? app.urlParams.map : "roadmap"
     });
 
     app.selectedFeature = new google.maps.Data({

@@ -33,4 +33,5 @@ Mapps is a simple, lightweight tool for quickly standing up a basic web mapping 
 | _sortfield_   | Any valid property       | Sort table by this column                               | False    | NA                |
 | _sortorder_   | asc / desc               | Column sort order                                       | False    | asc               |
 | _attribution_ | Any string               | Source attribution added to text in bottom right of map | False    | NA                |
+| _map_         | Any valid map type       | Google map type (roadmap, satellite, hybrid, terrain)   | False    | roadmap               |
 | _style_       | Data.StyleOptions (JSON) | Feature styling per the [google.maps.Data.StyleOptions](https://developers.google.com/maps/documentation/javascript/3.exp/reference#Data.StyleOptions) object specification | False | {"fillColor":"red","fillOpacity":0.2,"strokeColor":"red","strokeOpacity":1,"strokeWeight":2,"icon":{"path":0,"scale":5,"strokeColor":"black","strokeWeight":1,"fillColor":"red","fillOpacity":1}} |
