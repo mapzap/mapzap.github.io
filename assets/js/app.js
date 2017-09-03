@@ -152,22 +152,26 @@ var app = {
       };
 
       if (app.urlParams.style) {
-        /*{
-          "fillColor": "red",
-          "fillOpacity": 0.2,
-          "strokeColor": "red",
-          "strokeOpacity": 1,
-          "strokeWeight": 2,
-          "icon": {
-            "path": 0,
-            "scale": 7,
-            "strokeColor": "white",
-            "strokeWeight": 2,
-            "fillColor": "red",
-            "fillOpacity": 0.9
-          }
-        }*/
         style = JSON.parse(decodeURIComponent(app.urlParams.style));
+
+        if (style.property && style.values) {
+          var value = feature.getProperty(style.property);
+          style = {
+            fillColor: style.values[value],
+            fillOpacity: 0.2,
+            strokeColor: style.values[value],
+            strokeOpacity: 1,
+            strokeWeight: 2,
+            icon: {
+              path: google.maps.SymbolPath.CIRCLE,
+              scale: 7,
+              strokeColor: "white",
+              strokeWeight: 2,
+              fillColor: style.values[value],
+              fillOpacity: 0.9
+            }
+          };
+        }
       }
       return (style);
     });
@@ -357,6 +361,19 @@ var app = {
           formatter: app.formatProperty
         });
       });
+
+      if (app.urlParams.style) {
+        var style = JSON.parse(decodeURIComponent(app.urlParams.style));
+        if (style.property && style.values) {
+          columns[0].cellStyle = function cellStyle(value, row, index, field) {
+            return {
+              css: {
+                "box-shadow": "inset 4px 0em " + style.values[row[style.property]]
+              }
+            };
+          };
+        }
+      }
 
       app.map.data.addGeoJson(geojson);
 
