@@ -274,14 +274,14 @@ var app = {
       $.each(app.userFields, function(index, prop) {
         val = app.formatProperty(event.feature.getProperty(prop));
         if (val) {
-          content += "<tr><th>" + prop.toUpperCase() + "</th><td>" + val + "</td></tr>";
+          content += "<tr><th>" + prop.toUpperCase().replace(/_/g, " ") + "</th><td>" + val + "</td></tr>";
         }
       });
     } else {
       event.feature.forEachProperty(function(val, prop) {
         if (prop !== "_id_") {
           val = app.formatProperty(val);
-          content += "<tr><th>" + prop.toUpperCase() + "</th><td>" + val + "</td></tr>";
+          content += "<tr><th>" + prop.toUpperCase().replace(/_/g, " ") + "</th><td>" + val + "</td></tr>";
         }
       });
     }
