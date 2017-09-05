@@ -368,7 +368,8 @@ var app = {
           columns[0].cellStyle = function cellStyle(value, row, index, field) {
             return {
               css: {
-                "box-shadow": "inset 4px 0em " + style.values[row[style.property]]
+                "box-shadow": "inset 10px 0em " + style.values[row[style.property]],
+                "padding-left": "18px"
               }
             };
           };
