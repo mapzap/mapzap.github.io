@@ -242,10 +242,7 @@ var app = {
           locationCircle.setVisible(true);
           geolocationIcon.style.backgroundPosition = "-18px";
           navigator.geolocation.getCurrentPosition(function(position){
-            var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-            locationMarker.setPosition(latLng);
-            locationCircle.setCenter(latLng);
-            locationCircle.setRadius(position.coords.accuracy);
+            locationUpdate(position);
             app.map.fitBounds(locationCircle.getBounds());
             watchId = navigator.geolocation.watchPosition(locationUpdate, geolocationError, {enableHighAccuracy: true});
           }, geolocationError, {enableHighAccuracy: true});
