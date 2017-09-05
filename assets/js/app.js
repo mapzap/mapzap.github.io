@@ -351,7 +351,7 @@ var app = {
       columns = columns.map(function(column) {
         return ({
           field: column,
-          title: column.toUpperCase(),
+          title: column.toUpperCase().replace(/_/g, " "),
           sortable: true,
           visible: (column == "_id_") ? false : true,
           formatter: app.formatProperty
