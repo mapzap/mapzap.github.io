@@ -104,7 +104,6 @@ var app = {
         elementType: "labels.icon",
         stylers: [{visibility: "off"}]
       }],
-      zoomControl: "ontouchstart" in document.documentElement ? false : true,
       fullscreenControl: false,
       mapTypeId: app.urlParams.map ? app.urlParams.map : "roadmap"
     });
