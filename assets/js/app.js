@@ -8,6 +8,15 @@ var app = {
 
   geocoder: new google.maps.Geocoder(),
 
+  autocomplete: new google.maps.places.Autocomplete((document.getElementById("search")), {
+    types: ["geocode"]
+  }).addListener("place_changed", function() {
+    var place = this.getPlace();
+    if (place) {
+      app.placeChanged(place);
+    }
+  }),
+
   infoWindow: new google.maps.InfoWindow(),
 
   init: function() {
@@ -25,17 +34,6 @@ var app = {
   },
 
   bindUIActions: function() {
-    $("#geocode-btn").click(function() {
-      var address = $("#address-input").val();
-      app.geocodeAddress(address);
-      return false;
-    });
-
-    $("#geocode-form").submit(function() {
-      $("#geocode-btn").click();
-      return false;
-    });
-
     $("#extent-btn").click(function() {
       app.map.fitBounds(app.bounds);
       $(".navbar-collapse.in").collapse("hide");
@@ -305,21 +303,15 @@ var app = {
     });
   },
 
-  geocodeAddress: function(address) {
-    app.geocoder.geocode({"address": address}, function(results, status) {
-      if (status === "OK") {
-        app.map.setCenter(results[0].geometry.location);
-        app.map.setZoom(18);
-        if (results[0].geometry.bounds) {
-          app.map.fitBounds(results[0].geometry.bounds);
-        }
-        app.infoWindow.setPosition(results[0].geometry.location);
-        app.infoWindow.setContent(results[0].formatted_address);
-        app.infoWindow.open(app.map);
-      } else {
-        alert("Geocode was not successful for the following reason: " + status);
-      }
-    });
+  placeChanged: function(place) {
+    app.map.setCenter(place.geometry.location);
+    app.map.setZoom(18);
+    if (place.geometry.viewport) {
+      app.map.fitBounds(place.geometry.viewport);
+    }
+    app.infoWindow.setPosition(place.geometry.location);
+    app.infoWindow.setContent(place.formatted_address);
+    app.infoWindow.open(app.map);
     $(".in,.open").removeClass("in open");
   },
 

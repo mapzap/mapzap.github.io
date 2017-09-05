@@ -39,17 +39,12 @@
           <span class="navbar-brand" name="title" id="navbar-title">Mapps Data Viewer</span>
         </div>
         <div class="navbar-collapse collapse">
-          <form class="navbar-form navbar-right" id="geocode-form">
-            <div class="input-group">
-              <input type="text" class="form-control" id="address-input" placeholder="Address">
-              <span class="input-group-btn">
-                <button class="btn btn-default" type="button" id="geocode-btn"><i class="glyphicon glyphicon-search"></i></button>
-              </span>
-            </div>
+          <form class="navbar-form navbar-right">
+            <input type="search" class="form-control" id="search" placeholder="Address search">
           </form>
           <ul class="nav navbar-nav">
-            <li><a href="#" id="extent-btn" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="glyphicon glyphicon-globe white"></i>&nbsp;All Features</a></li>
-            <li><a href="#" id="download-btn" download="" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="glyphicon glyphicon-cloud-download white"></i>&nbsp;Download Data</a></li>
+            <li><a href="#" id="extent-btn" data-toggle="collapse" data-target=".navbar-collapse.in" title="Zoom to full extent"><i class="glyphicon glyphicon-globe white"></i>&nbsp;Zoom</a></li>
+            <li><a href="#" id="download-btn" download="" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="glyphicon glyphicon-cloud-download white"></i>&nbsp;Download</a></li>
             <li class="dropdown">
               <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-th white" title="Switch map view"></i>&nbsp;<span id="view">Split View </span><b class="caret"></b></a>
               <ul class="dropdown-menu" id="view-types">
@@ -96,7 +91,7 @@
       </div>
     </div>
 
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyCZFBnhpFAvqY4TMeV-4jXpHrbaEUv4zT0"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&key=AIzaSyCZFBnhpFAvqY4TMeV-4jXpHrbaEUv4zT0"></script>
     <script src="assets/vendor/jquery-2.2.4.min.js"></script>
     <script src="assets/vendor/bootstrap-3.3.7/js/bootstrap.min.js"></script>
     <script src="assets/vendor/bootstrap-table-1.11.0/bootstrap-table.min.js"></script>
