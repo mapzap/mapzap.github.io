@@ -43,10 +43,38 @@
             <input type="search" class="form-control" id="search" placeholder="Address search">
           </form>
           <ul class="nav navbar-nav">
-            <li><a href="#" id="extent-btn" data-toggle="collapse" data-target=".navbar-collapse.in" title="Zoom to full extent"><i class="glyphicon glyphicon-globe white"></i>&nbsp;Zoom</a></li>
-            <li><a href="#" id="download-btn" download="" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="glyphicon glyphicon-cloud-download white"></i>&nbsp;Download</a></li>
+            <li>
+              <a href="#" id="extent-btn" data-toggle="collapse" data-target=".navbar-collapse.in" title="Zoom to Extent">
+                <span class="hidden-xs">
+                  <i class="glyphicon glyphicon-globe white"></i>
+                </span>
+                <span class="visible-xs">
+                  <i class="glyphicon glyphicon-globe white"></i>
+                  &nbsp;Zoom to Extent
+                </span>
+              </a>
+            </li>
+            <li>
+              <a href="#" id="download-btn" download="" data-toggle="collapse" data-target=".navbar-collapse.in" title="Download data">
+                <span class="hidden-xs">
+                  <i class="glyphicon glyphicon-cloud-download white"></i>
+                </span>
+                <span class="visible-xs">
+                  <i class="glyphicon glyphicon-cloud-download white"></i>
+                  &nbsp;Download
+                </span>
+              </a>
+            </li>
             <li class="dropdown">
-              <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-th white" title="Switch map view"></i>&nbsp;<span id="view">Split View </span><b class="caret"></b></a>
+              <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown" title="Switch map view">
+                <span class="hidden-xs">
+                  <i class="glyphicon glyphicon-th-large white"></i>
+                </span>
+                <span class="visible-xs">
+                  <i class="glyphicon glyphicon-th-large white"></i>
+                  &nbsp;Switch View
+                </span>
+              </a>
               <ul class="dropdown-menu" id="view-types">
                 <li><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" name="view" id="split-view-btn">Split View</a></li>
                 <li><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" name="view" id="map-view-btn">Map View</a></li>

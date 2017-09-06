@@ -76,7 +76,7 @@ body {
     font-size: 18px;
   }
 }
-@media (min-width: 992px) {
+@media (min-width: 768px) {
   .navbar-form .form-control {
     width: 250px;
   }

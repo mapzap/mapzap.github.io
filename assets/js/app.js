@@ -6,7 +6,7 @@ var app = {
 
   bounds: new google.maps.LatLngBounds(),
 
-  geocoder: new google.maps.Geocoder(),
+  infoWindow: new google.maps.InfoWindow(),
 
   autocomplete: new google.maps.places.Autocomplete((document.getElementById("search")), {
     types: ["geocode"]
@@ -16,8 +16,6 @@ var app = {
       app.placeChanged(place);
     }
   }),
-
-  infoWindow: new google.maps.InfoWindow(),
 
   init: function() {
     this.bindUIActions();
@@ -279,7 +277,9 @@ var app = {
       event.feature.forEachProperty(function(val, prop) {
         if (prop !== "_id_") {
           val = app.formatProperty(val);
-          content += "<tr><th>" + prop.toUpperCase().replace(/_/g, " ") + "</th><td>" + val + "</td></tr>";
+          if (val) {
+            content += "<tr><th>" + prop.toUpperCase().replace(/_/g, " ") + "</th><td>" + val + "</td></tr>";
+          }
         }
       });
     }
@@ -442,6 +442,7 @@ var app = {
         var visibleIDs = data.map(function(feature) {
           return (feature._id_);
         });
+        app.bounds = new google.maps.LatLngBounds();
         app.map.data.forEach(function(feature) {
           if ($.inArray(feature.getId(), visibleIDs) == -1) {
             app.map.data.overrideStyle(feature, {
@@ -451,6 +452,11 @@ var app = {
             app.map.data.overrideStyle(feature, {
               visible: true
             });
+            if (feature.getGeometry()) {
+              feature.getGeometry().forEachLatLng(function(latLng){
+                app.bounds.extend(latLng);
+              });
+            }
           }
         });
       }
@@ -495,17 +501,14 @@ var app = {
 
   switchView: function(view) {
     if (view == "split") {
-      $("#view").html("Split View");
       $("#table-container").show().css("height", "55%");
       $("#map-container").show().css("height", "45%");
       $(window).resize();
     } else if (view == "map") {
-      $("#view").html("Map View");
       $("#map-container").show().css("height", "100%");
       $("#table-container").hide();
       $(window).resize();
     } else if (view == "table") {
-      $("#view").html("Table View");
       $("#table-container").show().css("height", "100%");
       $("#map-container").hide();
       $(window).resize();
