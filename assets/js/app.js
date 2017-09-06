@@ -183,7 +183,7 @@ var app = {
     });
 
     app.map.data.addListener("click", function(event) {
-      app.clickFeature(event);
+      app.clickFeature(event.feature);
     });
 
     if (app.urlParams.attribution) {
@@ -275,17 +275,17 @@ var app = {
     app.map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(geolocationBtn);
   },
 
-  clickFeature: function(event) {
+  clickFeature: function(feature) {
     var content = "<table class='table table-striped table-bordered table-condensed'>";
     if (app.userFields.length > 0) {
       $.each(app.userFields, function(index, prop) {
-        val = app.formatProperty(event.feature.getProperty(prop));
+        val = app.formatProperty(feature.getProperty(prop));
         if (val) {
           content += "<tr><th>" + prop.toUpperCase().replace(/_/g, " ") + "</th><td>" + val + "</td></tr>";
         }
       });
     } else {
-      event.feature.forEachProperty(function(val, prop) {
+      feature.forEachProperty(function(val, prop) {
         if (prop !== "_id_") {
           val = app.formatProperty(val);
           if (val) {
@@ -298,10 +298,10 @@ var app = {
     $("#feature-info").html(content);
     $("#feature-modal").modal("show");
 
-    app.selectFeature(event.feature);
+    app.selectFeature(feature);
 
     $("#share-btn").click(function() {
-      app.buildShareLink(event.feature);
+      app.buildShareLink(feature);
     });
   },
 
@@ -467,10 +467,7 @@ var app = {
       },
       onDblClickRow: function(row) {
         var feature = app.map.data.getFeatureById(row._id_);
-        if (feature.getGeometry().getType() == "Point") {
-          app.map.getStreetView().setPosition(feature.getGeometry().get());
-          app.map.getStreetView().setVisible(true);
-        }
+        app.clickFeature(feature);
       },
       onSearch: function(text) {
         var data = $("#table").bootstrapTable("getData");
