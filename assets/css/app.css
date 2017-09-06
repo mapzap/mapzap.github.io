@@ -42,8 +42,13 @@ body {
   padding-top: 5px;
   cursor: pointer;
 }
-.bootstrap-table {
-  margin-top: -4px;
+.fixed-table-toolbar .columns {
+  margin-top: 3px;
+  margin-bottom: 5px;
+}
+.fixed-table-toolbar .search {
+  margin-top: 3px;
+  margin-bottom: 5px;
 }
 .loading-indicator {
   position: absolute;
@@ -68,8 +73,8 @@ body {
   margin-right: 15px;
   display: inline;
 }
-.white {
-  color: white;
+.navbar-nav i {
+  color: #ffffff;
 }
 .legend {
   text-align: left;
