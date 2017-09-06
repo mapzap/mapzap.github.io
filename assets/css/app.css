@@ -71,6 +71,16 @@ body {
 .white {
   color: white;
 }
+.legend {
+  text-align: left;
+  line-height: 18px;
+}
+.legend i {
+  width: 18px;
+  height: 18px;
+  float: left;
+  margin-right: 8px;
+}
 @media (max-width: 992px) {
   .navbar .navbar-brand {
     font-size: 18px;

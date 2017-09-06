@@ -55,13 +55,24 @@
               </a>
             </li>
             <li>
-              <a href="#" id="download-btn" download="" data-toggle="collapse" data-target=".navbar-collapse.in" title="Download data">
+              <a href="#" id="download-btn" download="" data-toggle="collapse" data-target=".navbar-collapse.in" title="Download Data">
                 <span class="hidden-xs">
                   <i class="glyphicon glyphicon-cloud-download white"></i>
                 </span>
                 <span class="visible-xs">
                   <i class="glyphicon glyphicon-cloud-download white"></i>
                   &nbsp;Download
+                </span>
+              </a>
+            </li>
+            <li class="hidden" id="legend-item">
+              <a href="#" id="legend-btn" data-toggle="collapse" data-target=".navbar-collapse.in" title="Show Legend">
+                <span class="hidden-xs">
+                  <i class="glyphicon glyphicon-list-alt white"></i>
+                </span>
+                <span class="visible-xs">
+                  <i class="glyphicon glyphicon-list-alt white"></i>
+                  &nbsp;Show Legend
                 </span>
               </a>
             </li>
@@ -94,12 +105,12 @@
       <table id="table"></table>
     </div>
 
-    <div class="modal fade" id="featureModal" tabindex="-1" role="dialog">
+    <div class="modal fade" id="feature-modal" tabindex="-1" role="dialog">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
             <button class="close" type="button" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title text-primary" id="feature-title">Feature Info</h4>
+            <h4 class="modal-title text-primary">Feature Info</h4>
           </div>
           <div class="modal-body" id="feature-info"></div>
           <div class="modal-footer">
@@ -108,11 +119,27 @@
                 <i class="glyphicon glyphicon-share"></i>&nbsp;Share&nbsp;<span class="caret"></span>
               </button>
               <ul class="dropdown-menu" role="menu">
+                <li class="hidden"><a href="#" target="_blank" id="share-maps">Driving Directions</a></li>
                 <li><a href="#" target="_blank" id="share-hyperlink">Hyperlink</a></li>
                 <li><a href="#" target="_blank" id="share-twitter">Twitter</a></li>
                 <li><a href="#" target="_blank" id="share-facebook">Facebook</a></li>
               </ul>
             </div>
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="legend-modal" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button class="close" type="button" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title text-primary" id="legend-title">Legend</h4>
+          </div>
+          <div class="modal-body legend" id="legend"></div>
+          <div class="modal-footer">
             <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
           </div>
         </div>

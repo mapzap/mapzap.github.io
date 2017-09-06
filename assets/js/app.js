@@ -38,6 +38,12 @@ var app = {
       return false;
     });
 
+    $("#legend-btn").click(function() {
+      $("#legend-modal").modal("show");
+      $(".navbar-collapse.in").collapse("hide");
+      return false;
+    });
+
     $("[name='view']").click(function() {
       $(".in,.open").removeClass("in open");
       if (this.id === "split-view-btn") {
@@ -124,9 +130,14 @@ var app = {
     });
 
     app.map.addListener("click", function(event) {
+      $("input").blur();
       app.selectedFeature.forEach(function(feature) {
         app.selectedFeature.remove(feature);
       });
+    });
+
+    app.map.addListener("dragstart", function(event) {
+      $("input").blur();
     });
 
     app.map.data.setStyle(function(feature) {
@@ -285,7 +296,7 @@ var app = {
     }
     content += "<table>";
     $("#feature-info").html(content);
-    $("#featureModal").modal("show");
+    $("#feature-modal").modal("show");
 
     app.selectFeature(event.feature);
 
@@ -366,6 +377,11 @@ var app = {
         if (app.urlParams.style) {
           var style = JSON.parse(decodeURIComponent(app.urlParams.style));
           if (style.property && style.values) {
+            $("#legend-item").removeClass("hidden");
+            $("#legend-title").html(style.property.toUpperCase().replace(/_/g, " "));
+            $.each(style.values, function(property, value) {
+              $("#legend").append("<p><i style='background:" + value + "'></i> " + property + "</p>");
+            });
             $.each(columns, function(index, value) {
               if (value.field == style.property) {
                 columns[index].cellStyle = function cellStyle(value, row, index, field) {
@@ -495,6 +511,13 @@ var app = {
       params[key] = decodeURIComponent(value);
     });
     var link = location.origin + location.pathname + "?" + $.param(params).replace(/\+/g, "%20");
+    if (feature.getGeometry().getType() == "Point") {
+      var LatLng = feature.getGeometry().get();
+      $("#share-maps").parent().removeClass("hidden");
+      $("#share-maps").attr("href", "https://www.google.com/maps/dir/?api=1&destination=" + LatLng.lat() + "," + LatLng.lng());
+    } else {
+      $("#share-maps").parent().addClass("hidden");
+    }
     $("#share-hyperlink").attr("href", link);
     $("#share-twitter").attr("href", "https://twitter.com/intent/tweet?url=" + encodeURIComponent(link));
     $("#share-facebook").attr("href", "https://facebook.com/sharer.php?u=" + encodeURIComponent(link));
