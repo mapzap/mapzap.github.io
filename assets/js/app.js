@@ -320,6 +320,7 @@ var app = {
     var data = [];
 
     $.getJSON(src, function (geojson) {
+      app.totalCount = geojson.features.length;
       $.each(geojson.features, function(index, feature) {
         feature.id = index+1;
         feature.properties._id_ = index+1;
@@ -353,14 +354,18 @@ var app = {
       if (app.urlParams.style) {
         var style = JSON.parse(decodeURIComponent(app.urlParams.style));
         if (style.property && style.values) {
-          columns[0].cellStyle = function cellStyle(value, row, index, field) {
-            return {
-              css: {
-                "box-shadow": "inset 10px 0em " + style.values[row[style.property]],
-                "padding-left": "18px"
-              }
-            };
-          };
+          $.each(columns, function(index, value) {
+            if (value.field == style.property) {
+              columns[index].cellStyle = function cellStyle(value, row, index, field) {
+                return {
+                  css: {
+                    "box-shadow": "inset 10px 0em " + style.values[row[style.property]],
+                    "padding-left": "18px"
+                  }
+                };
+              };
+            }
+          });
         }
       }
 
@@ -420,7 +425,8 @@ var app = {
       trimOnSearch: false,
       searchAlign: "left",
       showColumns: true,
-      showToggle: true,
+      showToggle: false,
+      buttonsAlign: "left",
       columns: columns,
       data: data,
       onClickRow: function(row, $element) {
@@ -459,10 +465,14 @@ var app = {
             }
           }
         });
+        $("#feature-count").html(data.length);
       }
     });
 
+    $(".fixed-table-toolbar").append("<div class='columns columns-left pull-left text-muted' style='padding-left: 10px;'><span id='feature-count'></span> / <span id='total-count'></span></div>");
     $("#loading-mask").hide();
+    $("#feature-count").html(data.length);
+    $("#total-count").html(data.length);
   },
 
   buildShareLink: function(feature) {
