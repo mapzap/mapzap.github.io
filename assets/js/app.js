@@ -319,58 +319,71 @@ var app = {
     var columns = [];
     var data = [];
 
-    $.getJSON(src, function (geojson) {
-      app.totalCount = geojson.features.length;
-      $.each(geojson.features, function(index, feature) {
-        feature.id = index+1;
-        feature.properties._id_ = index+1;
-        data.push(feature.properties);
+    $.ajax({
+      type: "GET",
+      url: src,
+      success: function(geojson) {
 
-        $.each(feature.properties, function(index, prop) {
-          if (app.userFields.length > 0) {
-            $.each(app.userFields, function(index, prop) {
-              if (columns.indexOf(prop) === -1) {
-                columns.push(prop);
+        if (src.substr(-4) == ".csv") {
+          csv2geojson.csv2geojson(geojson, {
+            delimiter: "auto"
+          }, function(err, data) {
+            geojson = data;
+          });
+        }
+
+        app.totalCount = geojson.features.length;
+        $.each(geojson.features, function(index, feature) {
+          feature.id = index+1;
+          feature.properties._id_ = index+1;
+          data.push(feature.properties);
+
+          $.each(feature.properties, function(index, prop) {
+            if (app.userFields.length > 0) {
+              $.each(app.userFields, function(index, prop) {
+                if (columns.indexOf(prop) === -1) {
+                  columns.push(prop);
+                }
+              });
+            }
+            else if (columns.indexOf(index) === -1) {
+              columns.push(index);
+            }
+          });
+
+        });
+
+        columns = columns.map(function(column) {
+          return ({
+            field: column,
+            title: column.toUpperCase().replace(/_/g, " "),
+            sortable: true,
+            visible: (column == "_id_") ? false : true,
+            formatter: app.formatProperty
+          });
+        });
+
+        if (app.urlParams.style) {
+          var style = JSON.parse(decodeURIComponent(app.urlParams.style));
+          if (style.property && style.values) {
+            $.each(columns, function(index, value) {
+              if (value.field == style.property) {
+                columns[index].cellStyle = function cellStyle(value, row, index, field) {
+                  return {
+                    css: {
+                      "box-shadow": "inset 10px 0em " + style.values[row[style.property]],
+                      "padding-left": "18px"
+                    }
+                  };
+                };
               }
             });
           }
-          else if (columns.indexOf(index) === -1) {
-            columns.push(index);
-          }
-        });
-
-      });
-
-      columns = columns.map(function(column) {
-        return ({
-          field: column,
-          title: column.toUpperCase().replace(/_/g, " "),
-          sortable: true,
-          visible: (column == "_id_") ? false : true,
-          formatter: app.formatProperty
-        });
-      });
-
-      if (app.urlParams.style) {
-        var style = JSON.parse(decodeURIComponent(app.urlParams.style));
-        if (style.property && style.values) {
-          $.each(columns, function(index, value) {
-            if (value.field == style.property) {
-              columns[index].cellStyle = function cellStyle(value, row, index, field) {
-                return {
-                  css: {
-                    "box-shadow": "inset 10px 0em " + style.values[row[style.property]],
-                    "padding-left": "18px"
-                  }
-                };
-              };
-            }
-          });
         }
+
+        app.map.data.addGeoJson(geojson);
+
       }
-
-      app.map.data.addGeoJson(geojson);
-
     }).done(function() {
       // set global bounds
       app.map.data.forEach(function (feature) {
