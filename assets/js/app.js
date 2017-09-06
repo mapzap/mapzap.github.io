@@ -10,11 +10,6 @@ var app = {
 
   autocomplete: new google.maps.places.Autocomplete((document.getElementById("search")), {
     types: ["geocode"]
-  }).addListener("place_changed", function() {
-    var place = this.getPlace();
-    if (place) {
-      app.placeChanged(place);
-    }
   }),
 
   init: function() {
@@ -139,6 +134,15 @@ var app = {
     app.map.addListener("dragstart", function(event) {
       $("input").blur();
     });
+
+    app.autocomplete.addListener("place_changed", function() {
+      var place = this.getPlace();
+      if (place) {
+        app.placeChanged(place);
+      }
+    });
+
+    app.autocomplete.bindTo("bounds", app.map);
 
     app.map.data.setStyle(function(feature) {
       var style = {
