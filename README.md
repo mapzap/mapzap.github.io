@@ -4,6 +4,10 @@ Build responsive web mapping applications via URL parameters.
 
 A simple, lightweight tool for quickly standing up responsive web mapping applications (mapzaps) _without having to write any code_. Built on the [Google Maps JavaScript API](https://developers.google.com/maps/web/), this utility lets you configure your settings via simple URL parameters. Feed it a source data file in GeoJSON format (or CSV with `latitude` & `longitude` columns), give it a title, icon, and tell it which data fields you want to show, and you get a responsive, mobile-friendly "mapzap" for viewing and interacting with your data. Your mapzap can be shared, embedded into websites and blogs, and added to your mobile device's homescreen for a native, full screen experience. Use [geojson.io](http://geojson.io/), [GeoEditor](https://geoeditor.maptiler.com) [QGIS](https://www.qgis.org/) or any other modern mapping tool to generate your GeoJSON, place it on a web server, push it to GitHub, Google Drive, Dropbox, etc. or save it as a Gist and quickly wrap it up as a responsive web app.
 
+### Get Started:
+
+Use the [Builder Tool](https://bmcbride.github.io/mapzap/build.html) to quickly build your Mapzap!
+
 ### Features:
 
 - Fullscreen mobile-friendly map app with responsive navbar, modal popups, and map/table views
