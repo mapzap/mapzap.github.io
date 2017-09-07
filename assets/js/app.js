@@ -112,12 +112,12 @@ var app = {
         fillColor: "#00ffff",
         fillOpacity: 0,
         strokeColor: "#00ffff",
-        strokeWeight: 3,
+        strokeWeight: (app.urlParams.style && JSON.parse(decodeURIComponent(app.urlParams.style)).strokeWeight) ? JSON.parse(decodeURIComponent(app.urlParams.style)).strokeWeight : 2,
         icon: {
           path: google.maps.SymbolPath.CIRCLE,
-          scale: 7,
+          scale: (app.urlParams.style && JSON.parse(decodeURIComponent(app.urlParams.style)).icon && JSON.parse(decodeURIComponent(app.urlParams.style)).icon.scale) ? JSON.parse(decodeURIComponent(app.urlParams.style)).icon.scale : 5,
           strokeColor: "white",
-          strokeWeight: 2,
+          strokeWeight: (app.urlParams.style && JSON.parse(decodeURIComponent(app.urlParams.style)).icon && JSON.parse(decodeURIComponent(app.urlParams.style)).icon.strokeWeight) ? JSON.parse(decodeURIComponent(app.urlParams.style)).icon.strokeWeight : 1,
           fillColor: "#00ffff",
           fillOpacity: 0.9
         }
@@ -174,9 +174,9 @@ var app = {
             strokeWeight: 2,
             icon: {
               path: google.maps.SymbolPath.CIRCLE,
-              scale: 7,
+              scale: 5,
               strokeColor: "white",
-              strokeWeight: 2,
+              strokeWeight: 1,
               fillColor: style.values[value],
               fillOpacity: 0.9
             }
