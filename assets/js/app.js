@@ -153,9 +153,9 @@ var app = {
         strokeWeight: 2,
         icon: {
           path: google.maps.SymbolPath.CIRCLE,
-          scale: 7,
+          scale: 5,
           strokeColor: "white",
-          strokeWeight: 2,
+          strokeWeight: 1,
           fillColor: "red",
           fillOpacity: 0.9
         }
