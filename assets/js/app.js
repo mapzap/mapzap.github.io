@@ -337,9 +337,9 @@ var app = {
     $.ajax({
       type: "GET",
       url: src,
-      success: function(geojson) {
-
-        if (src.substr(-4) == ".csv") {
+      success: function(geojson, status, xhr) {
+        var ct = xhr.getResponseHeader("content-type") || "";
+        if (ct.indexOf("csv") > -1) {
           csv2geojson.csv2geojson(geojson, {
             delimiter: "auto"
           }, function(err, data) {
