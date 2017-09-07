@@ -150,15 +150,7 @@ var app = {
         fillOpacity: 0.2,
         strokeColor: "red",
         strokeOpacity: 1,
-        strokeWeight: 2,
-        icon: {
-          path: google.maps.SymbolPath.CIRCLE,
-          scale: 5,
-          strokeColor: "white",
-          strokeWeight: 1,
-          fillColor: "red",
-          fillOpacity: 0.9
-        }
+        strokeWeight: 2
       };
 
       if (app.urlParams.style) {
@@ -172,7 +164,7 @@ var app = {
             strokeColor: style.values[value],
             strokeOpacity: 1,
             strokeWeight: 2,
-            icon: {
+            icon: style.values[value].startsWith("http") ? style.values[value] : {
               path: google.maps.SymbolPath.CIRCLE,
               scale: 5,
               strokeColor: "white",
@@ -212,7 +204,7 @@ var app = {
       clickable: false,
       visible: false,
       icon: {
-        path: google.maps.SymbolPath.CIRCLE,
+        path: "google.maps.SymbolPath.CIRCLE",
         scale: 6,
         fillColor: "#3a84df",
         fillOpacity: 0.9,
@@ -376,6 +368,8 @@ var app = {
             field: column,
             title: column.toUpperCase().replace(/_/g, " "),
             sortable: true,
+            align: "left",
+            valign: "middle",
             visible: (column == "_id_") ? false : true,
             formatter: app.formatProperty
           });
@@ -387,17 +381,33 @@ var app = {
             $("#legend-item").removeClass("hidden");
             $("#legend-title").html(style.property.toUpperCase().replace(/_/g, " "));
             $.each(style.values, function(property, value) {
-              $("#legend").append("<p><i style='background:" + value + "'></i> " + property + "</p>");
+              if (value.startsWith("http")) {
+                $("#legend").append("<p><img src='" + value + "'></i> " + property + "</p>");
+              } else {
+                $("#legend").append("<p><i style='background:" + value + "'></i> " + property + "</p>");
+              }
             });
             $.each(columns, function(index, value) {
               if (value.field == style.property) {
                 columns[index].cellStyle = function cellStyle(value, row, index, field) {
-                  return {
-                    css: {
-                      "box-shadow": "inset 10px 0em " + style.values[row[style.property]],
-                      "padding-left": "18px"
-                    }
-                  };
+                  if (style.values[row[style.property]].startsWith("http")) {
+                    return {
+                      css: {
+                        "background-image": "url(" + style.values[row[style.property]] + ")",
+                        "background-repeat": "no-repeat",
+                        "background-size": "18px",
+                        "padding-left": "22px",
+                        "background-position": "left center"
+                      }
+                    };
+                  } else {
+                    return {
+                      css: {
+                        "box-shadow": "inset 10px 0em " + style.values[row[style.property]],
+                        "padding-left": "18px"
+                      }
+                    };
+                  }
                 };
               }
             });
