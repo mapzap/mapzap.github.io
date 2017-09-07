@@ -193,6 +193,9 @@ var app = {
     if (app.urlParams.attribution) {
       var attribution = decodeURIComponent(app.urlParams.attribution);
       var attributionDiv = document.createElement("div");
+      if (attribution.startsWith("http")) {
+        attribution = "<a href='" + attribution + "' target='_blank' style='color: rgb(68, 68, 68); text-decoration: none;'>" + attribution + "</a>";
+      }
       attributionDiv.id = "attribution";
       attributionDiv.innerHTML = '<div class="gmnoprint gm-style-cc" draggable="false" style="z-index: 1000001; user-select: none; height: 14px; line-height: 14px; position: absolute; right: 0px; bottom: 0px;"><div style="opacity: 0.7; width: 100%; height: 100%; position: absolute;"><div style="width: 1px;"></div><div style="background-color: rgb(245, 245, 245); width: auto; height: 100%; margin-left: 1px;"></div></div><div style="position: relative; padding-right: 6px; padding-left: 6px; font-family: Roboto, Arial, sans-serif; font-size: 10px; color: rgb(68, 68, 68); white-space: nowrap; direction: ltr; text-align: right; vertical-align: middle; display: inline-block;">' + attribution +'</div></div>';
       attributionDiv.index = 1;
