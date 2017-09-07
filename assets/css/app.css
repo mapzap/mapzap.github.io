@@ -80,9 +80,15 @@ body {
   text-align: left;
   line-height: 18px;
 }
-.legend i, img {
+.legend i {
   width: 18px;
   height: 18px;
+  float: left;
+  margin-right: 8px;
+}
+.legend img {
+  max-width: 18px;
+  max-height: 18px;
   float: left;
   margin-right: 8px;
 }

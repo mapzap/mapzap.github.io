@@ -159,17 +159,17 @@ var app = {
         if (style.property && style.values) {
           var value = feature.getProperty(style.property);
           style = {
-            fillColor: style.values[value],
+            fillColor: style.values[value] ? style.values[value] : "white",
             fillOpacity: 0.2,
-            strokeColor: style.values[value],
+            strokeColor: style.values[value] ? style.values[value] : "white",
             strokeOpacity: 1,
             strokeWeight: 2,
-            icon: style.values[value].startsWith("http") ? style.values[value] : {
+            icon: (style.values[value] && style.values[value].startsWith("http")) ? style.values[value] : {
               path: google.maps.SymbolPath.CIRCLE,
               scale: 5,
               strokeColor: "white",
               strokeWeight: 1,
-              fillColor: style.values[value],
+              fillColor: style.values[value] ? style.values[value] : "white",
               fillOpacity: 0.9
             }
           };
@@ -390,20 +390,21 @@ var app = {
             $.each(columns, function(index, value) {
               if (value.field == style.property) {
                 columns[index].cellStyle = function cellStyle(value, row, index, field) {
-                  if (style.values[row[style.property]].startsWith("http")) {
+                  if (style.values[row[style.property]] && style.values[row[style.property]].startsWith("http")) {
                     return {
                       css: {
                         "background-image": "url(" + style.values[row[style.property]] + ")",
                         "background-repeat": "no-repeat",
-                        "background-size": "18px",
+                        "background-size": "16px",
                         "padding-left": "22px",
-                        "background-position": "left center"
+                        "background-position": "left center",
+                        "background-position-x": "3px"
                       }
                     };
                   } else {
                     return {
                       css: {
-                        "box-shadow": "inset 10px 0em " + style.values[row[style.property]],
+                        "box-shadow": "inset 10px 0em " + (style.values[row[style.property]] ? style.values[row[style.property]] : "white"),
                         "padding-left": "18px"
                       }
                     };
