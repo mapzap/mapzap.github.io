@@ -8,6 +8,8 @@ A simple, lightweight tool for quickly standing up responsive web mapping applic
 
 Use the [Builder Tool](https://bmcbride.github.io/mapzap/build.html) to quickly build your Mapzap!
 
+You can also download or fork this repo and host your own version. Please use your own Google Maps API key.
+
 ### Features:
 
 - Fullscreen mobile-friendly map app with responsive navbar, modal popups, and map/table views
