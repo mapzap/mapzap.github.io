@@ -6,7 +6,7 @@ A simple, lightweight tool for quickly standing up responsive web mapping applic
 
 ### Get Started
 
-Use the [Builder Tool](https://bmcbride.github.io/mapzap/build.html) to quickly build your Mapzap!
+Use the [Builder Tool](https://mapzap.github.io/build.html) to quickly build your Mapzap!
 
 You can also download or fork this repo and host your own version. If you self-host, please use your own Google Maps API key.
 
@@ -15,7 +15,7 @@ You can also download or fork this repo and host your own version. If you self-h
 - Fullscreen mobile-friendly web app with responsive navbar, modal popups, and map/table/split views.
 - Built on the incredibly popular [Bootstrap](http://getbootstrap.com/) and [Google Maps](https://developers.google.com/maps/web/) frameworks.
 - Configure everything via URL parameters (no coding necessary)!
-- Define data source, app title, icon, display fields/properties & data attribution manually or with the [Builder Tool](https://bmcbride.github.io/mapzap/build.html).
+- Define data source, app title, icon, display fields/properties & data attribution manually or with the [Builder Tool](https://mapzap.github.io/build.html).
 - Completely client-side, can be hosted for free on [GitHub Pages](https://pages.github.com/)
 - Supports custom feature styling and [StreetView](https://www.google.com/streetview/understand/) integration
 - Interactive feature table with filtering, sorting, and column toggling via [Bootstrap Table](http://bootstrap-table.wenzhixin.net.cn/)
@@ -23,18 +23,18 @@ You can also download or fork this repo and host your own version. If you self-h
 ### Screenshots
 
 #### Mapz
-![Mobile](https://bmcbride.github.io/mapzap/screenshots/mobile.png)
+![Mobile](https://mapzap.github.io/screenshots/mobile.png)
 
 #### Builder
-![Builder](https://bmcbride.github.io/mapzap/screenshots/builder.png)
+![Builder](https://mapzap.github.io/screenshots/builder.png)
 
 ### Examples
 
-- [DC WiFi Social](https://bmcbride.github.io/mapzap/?src=https://raw.githubusercontent.com/benbalter/dc-wifi-social/master/bars.geojson&fields=name,address&title=DC%20WiFi%20Social&sortfield=name&attribution=https://github.com/benbalter/dc-wifi-social) A GitHub based collaborative list of DC locations that serve up both Internet and Alcohol from [Ben Balter](https://github.com/benbalter/dc-wifi-social)
-- [US States](https://bmcbride.github.io/mapzap/?src=https%3A%2F%2Fd2ad6b4ur7yvpq.cloudfront.net%2Fnaturalearth-3.3.0%2Fne_110m_admin_1_states_provinces_shp.geojson&icon=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fen%2Fthumb%2Fa%2Fa4%2FFlag_of_the_United_States.svg%2F320px-Flag_of_the_United_States.svg.png&title=US%20States&fields=region%2Cname%2Cname_alt%2Cadm1_code%2Cwikipedia&attribution=http%3A%2F%2Fgeojson.xyz&map=roadmap&sortfield=name&sortorder=asc&style=%7B%0A%20%20%22property%22%3A%20%22region%22%2C%0A%20%20%22values%22%3A%20%7B%0A%20%20%20%20%22West%22%3A%20%22%23DA0796%22%2C%0A%20%20%20%20%22South%22%3A%20%22%23CB0D0C%22%2C%0A%20%20%20%20%22Northeast%22%3A%20%22%23FF8819%22%2C%0A%20%20%20%20%22Midwest%22%3A%20%22%23FFD300%22%0A%20%20%7D%0A%7D) Natural Earth _admin 1 states provinces shp_ data from [http://geojson.xyz/](http://geojson.xyz/)
-- [Football Clubs of Europe](https://bmcbride.github.io/mapzap/?src=https://web.fulcrumapp.com/shares/82982e4c55707a34.geojson&fields=name,full_name,ground,league,city,state_province,country,photo&title=Football%20Clubs%20of%20Europe&sortfield=name&attribution=Courtesy%20of%20Coleman%20McCormick) A Fulcrum mapping project from [Coleman McCormick](https://github.com/colemanm/)
-- [NYC Coffee Shops](https://bmcbride.github.io/mapzap/?src=https://api.tiles.mapbox.com/v3/mapbox.o11ipb8h/markers.geojson&fields=name,description&title=NYC%20Coffee%20Shops&sortfield=name&attribution=Courtesy%20of%20Mapbox) via [Mapbox](https://www.mapbox.com/blog/open-web-geojson/)
-- [Baseball Parks](https://bmcbride.github.io/mapzap/?src=https://raw.githubusercontent.com/cageyjames/GeoJSON-Ballparks/master/ballparks.geojson&fields=Ballpark,Team,League,Class&title=GeoJSON%20Ballparks&sortfield=Ballpark&attribution=https://github.com/cageyjames/GeoJSON-Ballparks&style={%22icon%22:{%22path%22:0,%22scale%22:4,%22strokeColor%22:%22white%22,%22strokeWeight%22:1,%22fillColor%22:%22orange%22,%22fillOpacity%22:1}}) A GeoJSON Ballpark mapping project from [James Fee](https://github.com/cageyjames/GeoJSON-Ballparks)
+- [DC WiFi Social](https://mapzap.github.io/?src=https://raw.githubusercontent.com/benbalter/dc-wifi-social/master/bars.geojson&fields=name,address&title=DC%20WiFi%20Social&sortfield=name&attribution=https://github.com/benbalter/dc-wifi-social) A GitHub based collaborative list of DC locations that serve up both Internet and Alcohol from [Ben Balter](https://github.com/benbalter/dc-wifi-social)
+- [US States](https://mapzap.github.io/?src=https%3A%2F%2Fd2ad6b4ur7yvpq.cloudfront.net%2Fnaturalearth-3.3.0%2Fne_110m_admin_1_states_provinces_shp.geojson&icon=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fen%2Fthumb%2Fa%2Fa4%2FFlag_of_the_United_States.svg%2F320px-Flag_of_the_United_States.svg.png&title=US%20States&fields=region%2Cname%2Cname_alt%2Cadm1_code%2Cwikipedia&attribution=http%3A%2F%2Fgeojson.xyz&map=roadmap&sortfield=name&sortorder=asc&style=%7B%0A%20%20%22property%22%3A%20%22region%22%2C%0A%20%20%22values%22%3A%20%7B%0A%20%20%20%20%22West%22%3A%20%22%23DA0796%22%2C%0A%20%20%20%20%22South%22%3A%20%22%23CB0D0C%22%2C%0A%20%20%20%20%22Northeast%22%3A%20%22%23FF8819%22%2C%0A%20%20%20%20%22Midwest%22%3A%20%22%23FFD300%22%0A%20%20%7D%0A%7D) Natural Earth _admin 1 states provinces shp_ data from [http://geojson.xyz/](http://geojson.xyz/)
+- [Football Clubs of Europe](https://mapzap.github.io/?src=https://web.fulcrumapp.com/shares/82982e4c55707a34.geojson&fields=name,full_name,ground,league,city,state_province,country,photo&title=Football%20Clubs%20of%20Europe&sortfield=name&attribution=Courtesy%20of%20Coleman%20McCormick) A Fulcrum mapping project from [Coleman McCormick](https://github.com/colemanm/)
+- [NYC Coffee Shops](https://mapzap.github.io/?src=https://api.tiles.mapbox.com/v3/mapbox.o11ipb8h/markers.geojson&fields=name,description&title=NYC%20Coffee%20Shops&sortfield=name&attribution=Courtesy%20of%20Mapbox) via [Mapbox](https://www.mapbox.com/blog/open-web-geojson/)
+- [Baseball Parks](https://mapzap.github.io/?src=https://raw.githubusercontent.com/cageyjames/GeoJSON-Ballparks/master/ballparks.geojson&fields=Ballpark,Team,League,Class&title=GeoJSON%20Ballparks&sortfield=Ballpark&attribution=https://github.com/cageyjames/GeoJSON-Ballparks&style={%22icon%22:{%22path%22:0,%22scale%22:4,%22strokeColor%22:%22white%22,%22strokeWeight%22:1,%22fillColor%22:%22orange%22,%22fillOpacity%22:1}}) A GeoJSON Ballpark mapping project from [James Fee](https://github.com/cageyjames/GeoJSON-Ballparks)
 
 ### URL Parameters
 
