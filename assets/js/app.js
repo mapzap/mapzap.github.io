@@ -204,7 +204,7 @@ var app = {
       clickable: false,
       visible: false,
       icon: {
-        path: "google.maps.SymbolPath.CIRCLE",
+        path: google.maps.SymbolPath.CIRCLE,
         scale: 6,
         fillColor: "#3a84df",
         fillOpacity: 0.9,
