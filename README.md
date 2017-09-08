@@ -1,6 +1,6 @@
 # Mapzap
 
-Build responsive web mapping applications via URL parameters.
+Build custom responsive web mapping applications without any coding!
 
 A simple, lightweight tool for quickly standing up responsive web mapping applications (mapzaps) _without having to write any code_. Built on the [Google Maps JavaScript API](https://developers.google.com/maps/web/), this utility lets you configure your settings via simple URL parameters. Feed it a source data file in GeoJSON format (or CSV with `latitude` & `longitude` columns), give it a title, icon, and tell it which data fields you want to show, and you get a responsive, mobile-friendly "mapzap" for viewing and interacting with your data. Your mapzap can be shared, embedded into websites and blogs, and added to your mobile device's homescreen for a native, full screen experience. Use [geojson.io](http://geojson.io/), [GeoEditor](https://geoeditor.maptiler.com), [Fulcrum](http://www.fulcrumapp.com/), [QGIS](https://www.qgis.org/) or any other modern mapping tool to generate your GeoJSON, place it on a web server, push it to GitHub, Google Drive, Dropbox, etc. or save it as a Gist and quickly wrap it up as a responsive web app.
 
@@ -8,14 +8,14 @@ A simple, lightweight tool for quickly standing up responsive web mapping applic
 
 Use the [Builder Tool](https://bmcbride.github.io/mapzap/build.html) to quickly build your Mapzap!
 
-You can also download or fork this repo and host your own version. Please use your own Google Maps API key.
+You can also download or fork this repo and host your own version. If you self-host, please use your own Google Maps API key.
 
 ### Features
 
-- Fullscreen mobile-friendly map app with responsive navbar, modal popups, and map/table views
-- Built on the incredibly popular [Bootstrap](http://getbootstrap.com/) and [Google Maps](https://developers.google.com/maps/web/) frameworks
+- Fullscreen mobile-friendly web app with responsive navbar, modal popups, and map/table/split views.
+- Built on the incredibly popular [Bootstrap](http://getbootstrap.com/) and [Google Maps](https://developers.google.com/maps/web/) frameworks.
 - Configure everything via URL parameters (no coding necessary)!
-- Define data source, app title, icon, display fields/properties & data attribution
+- Define data source, app title, icon, display fields/properties & data attribution manually or with the [Builder Tool](https://bmcbride.github.io/mapzap/build.html).
 - Completely client-side, can be hosted for free on [GitHub Pages](https://pages.github.com/)
 - Supports custom feature styling and [StreetView](https://www.google.com/streetview/understand/) integration
 - Interactive feature table with filtering, sorting, and column toggling via [Bootstrap Table](http://bootstrap-table.wenzhixin.net.cn/)
