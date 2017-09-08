@@ -22,11 +22,11 @@ You can also download or fork this repo and host your own version. Please use yo
 
 ### Screenshots
 
-#### Builder
-![Builder](https://bmcbride.github.io/mapzap/screenshots/builder.png)
-
 #### Mapz
 ![Mobile](https://bmcbride.github.io/mapzap/screenshots/mobile.png)
+
+#### Builder
+![Builder](https://bmcbride.github.io/mapzap/screenshots/builder.png)
 
 ### Examples
 
