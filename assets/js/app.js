@@ -73,7 +73,6 @@ var app = {
       app.fetchData(decodeURIComponent(app.urlParams.src));
       $("#download-btn").attr("href", app.urlParams.src);
     } else {
-      alert("URL `src` parameter missing! Redirecting to Mapzap Builder...");
       window.location = window.location.href + "build.html";
       return false;
     }
