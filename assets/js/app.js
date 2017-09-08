@@ -73,8 +73,9 @@ var app = {
       app.fetchData(decodeURIComponent(app.urlParams.src));
       $("#download-btn").attr("href", app.urlParams.src);
     } else {
-      alert("URL `src` parameter missing!");
-      $("#loading-mask").hide();
+      alert("URL `src` parameter missing! Redirecting to Mapzap Builder...");
+      window.location = window.location.href + "build.html";
+      return false;
     }
 
     if (app.urlParams.icon && app.urlParams.icon.length > 0) {
@@ -519,7 +520,6 @@ var app = {
     });
 
     $(".fixed-table-toolbar").append("<div class='columns columns-left pull-left text-muted' style='padding-left: 10px;'><span id='feature-count'></span> / <span id='total-count'></span></div>");
-    $("#loading-mask").hide();
     $("#feature-count").html(data.length);
     $("#total-count").html(data.length);
   },
@@ -584,4 +584,12 @@ var app = {
 
 $(document).ready(function() {
   app.init();
+});
+
+$(document).ajaxStart(function(){
+  $("#loading-mask").show();
+});
+
+$(document).ajaxStop(function(){
+  $("#loading-mask").hide();
 });
