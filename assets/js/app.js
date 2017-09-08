@@ -333,13 +333,18 @@ var app = {
       type: "GET",
       url: src,
       success: function(geojson, status, xhr) {
-        var ct = xhr.getResponseHeader("content-type") || "";
-        if (ct.indexOf("csv") > -1) {
-          csv2geojson.csv2geojson(geojson, {
-            delimiter: "auto"
-          }, function(err, data) {
-            geojson = data;
-          });
+        if (typeof geojson == "string") {
+          // Try to parse GeoJSON returned as text (Gist)
+          try {
+            JSON.parse(geojson);
+            geojson = JSON.parse(geojson);
+          } catch(e) {
+            csv2geojson.csv2geojson(geojson, {
+              delimiter: "auto"
+            }, function(err, data) {
+              geojson = data;
+            });
+          }
         }
 
         app.totalCount = geojson.features.length;
