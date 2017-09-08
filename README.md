@@ -25,6 +25,9 @@ You can also download or fork this repo and host your own version. Please use yo
 #### Builder
 ![Builder](https://bmcbride.github.io/mapzap/screenshots/builder.png)
 
+#### Mapz
+![Mobile](https://bmcbride.github.io/mapzap/screenshots/mobile.png)
+
 ### Examples
 
 - [DC WiFi Social](https://bmcbride.github.io/mapzap/?src=https://raw.githubusercontent.com/benbalter/dc-wifi-social/master/bars.geojson&fields=name,address&title=DC%20WiFi%20Social&sortfield=name&attribution=https://github.com/benbalter/dc-wifi-social) A GitHub based collaborative list of DC locations that serve up both Internet and Alcohol from [Ben Balter](https://github.com/benbalter/dc-wifi-social)
