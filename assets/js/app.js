@@ -316,15 +316,17 @@ var app = {
   },
 
   placeChanged: function(place) {
-    app.map.setCenter(place.geometry.location);
-    app.map.setZoom(18);
-    if (place.geometry.viewport) {
-      app.map.fitBounds(place.geometry.viewport);
+    if (place && place.geometry) {
+      app.map.setCenter(place.geometry.location);
+      app.map.setZoom(18);
+      if (place.geometry.viewport) {
+        app.map.fitBounds(place.geometry.viewport);
+      }
+      app.infoWindow.setPosition(place.geometry.location);
+      app.infoWindow.setContent(place.formatted_address);
+      app.infoWindow.open(app.map);
+      $(".in,.open").removeClass("in open");
     }
-    app.infoWindow.setPosition(place.geometry.location);
-    app.infoWindow.setContent(place.formatted_address);
-    app.infoWindow.open(app.map);
-    $(".in,.open").removeClass("in open");
   },
 
   fetchData: function(src) {
@@ -585,6 +587,12 @@ var app = {
 
 $(document).ready(function() {
   app.init();
+  $(window).keydown(function(event){
+    if (event.keyCode == 13) {
+      event.preventDefault();
+      return false;
+    }
+  });
 });
 
 $(document).ajaxStart(function(){
