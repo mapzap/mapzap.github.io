@@ -109,6 +109,7 @@ var app = {
       map: app.map,
       style: {
         clickable: false,
+        zIndex: 2,
         fillColor: "#00ffff",
         fillOpacity: 0,
         strokeColor: "#00ffff",
@@ -146,6 +147,7 @@ var app = {
 
     app.map.data.setStyle(function(feature) {
       var style = {
+        zIndex: 1,
         fillColor: "red",
         fillOpacity: 0.2,
         strokeColor: "red",
