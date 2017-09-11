@@ -8,6 +8,8 @@ var app = {
 
   infoWindow: new google.maps.InfoWindow(),
 
+  geocoder: new google.maps.Geocoder(),
+
   autocomplete: new google.maps.places.Autocomplete((document.getElementById("search")), {
     types: ["geocode"]
   }),
@@ -325,8 +327,29 @@ var app = {
       app.infoWindow.setPosition(place.geometry.location);
       app.infoWindow.setContent(place.formatted_address);
       app.infoWindow.open(app.map);
-      $(".in,.open").removeClass("in open");
+    } else if (place.name) {
+      app.geocodeAddress(place.name);
     }
+    $(".in,.open").removeClass("in open");
+  },
+
+  geocodeAddress: function(address) {
+    app.geocoder.geocode({
+      "address": address
+    }, function(results, status) {
+      if (status === "OK") {
+        app.map.setCenter(results[0].geometry.location);
+        app.map.setZoom(18);
+        if (results[0].geometry.bounds) {
+          app.map.fitBounds(results[0].geometry.bounds);
+        }
+        app.infoWindow.setPosition(results[0].geometry.location);
+        app.infoWindow.setContent(results[0].formatted_address);
+        app.infoWindow.open(app.map);
+      } else {
+        alert("Geocode was not successful for the following reason: " + status);
+      }
+    });
   },
 
   fetchData: function(src) {
@@ -587,7 +610,7 @@ var app = {
 
 $(document).ready(function() {
   app.init();
-  $(window).keydown(function(event){
+  $("#search").keydown(function(event){
     if (event.keyCode == 13) {
       event.preventDefault();
       return false;
