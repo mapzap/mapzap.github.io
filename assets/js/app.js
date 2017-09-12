@@ -107,6 +107,10 @@ var app = {
       mapTypeId: app.urlParams.map ? app.urlParams.map : "roadmap"
     });
 
+    app.markerCluster = new MarkerClusterer(app.map, null, {
+      imagePath: "assets/img/markerclusterer/m"
+    });
+
     app.selectedFeature = new google.maps.Data({
       map: app.map,
       style: {
@@ -181,6 +185,10 @@ var app = {
       }
       return (style);
     });
+
+    if (app.urlParams.cluster) {
+      app.map.data.setMap(null);
+    }
 
     app.map.data.addListener("click", function(event) {
       app.clickFeature(event.feature);
@@ -308,7 +316,28 @@ var app = {
     });
   },
 
-  selectFeature: function(feature){
+  addMarkerToCluster: function(feature) {
+    var icon;
+    if (app.urlParams.style) {
+      var style = JSON.parse(decodeURIComponent(app.urlParams.style));
+      var value = feature.getProperty(style.property);
+      if (style.property && style.values) {
+        icon = (style.values[value] && style.values[value].startsWith("http")) ? style.values[value] : "";
+      } else {
+        icon = style.icon;
+      }
+    }
+    var marker = new google.maps.Marker({
+      position: feature.getGeometry().get(),
+      icon: icon
+    });
+    app.markerCluster.addMarker(marker);
+    google.maps.event.addListener(marker, "click", function(event) {
+      app.clickFeature(feature);
+    });
+  },
+
+  selectFeature: function(feature) {
     feature.toGeoJson(function(geojson){
       app.selectedFeature.forEach(function(feature) {
         app.selectedFeature.remove(feature);
@@ -456,6 +485,9 @@ var app = {
         if (feature.getGeometry()) {
           feature.getGeometry().forEachLatLng(function(latLng){
             app.bounds.extend(latLng);
+            if (feature.getGeometry().getType() == "Point" && app.urlParams.cluster) {
+              app.addMarkerToCluster(feature);
+            }
           });
         }
       });
@@ -525,6 +557,7 @@ var app = {
           return (feature._id_);
         });
         app.bounds = new google.maps.LatLngBounds();
+        app.markerCluster.clearMarkers();
         app.map.data.forEach(function(feature) {
           if ($.inArray(feature.getId(), visibleIDs) == -1) {
             app.map.data.overrideStyle(feature, {
@@ -537,6 +570,9 @@ var app = {
             if (feature.getGeometry()) {
               feature.getGeometry().forEachLatLng(function(latLng){
                 app.bounds.extend(latLng);
+                if (feature.getGeometry().getType() == "Point" && app.urlParams.cluster) {
+                  app.addMarkerToCluster(feature);
+                }
               });
             }
           }
