@@ -361,18 +361,26 @@ var app = {
       type: "GET",
       url: src,
       success: function(geojson, status, xhr) {
-        if (typeof geojson == "string") {
-          // Try to parse GeoJSON returned as text (Gist)
-          try {
-            JSON.parse(geojson);
-            geojson = JSON.parse(geojson);
-          } catch(e) {
-            csv2geojson.csv2geojson(geojson, {
-              delimiter: "auto"
-            }, function(err, data) {
-              geojson = data;
-            });
+        if (app.urlParams.src.endsWith(".geojson") || app.urlParams.f == "geojson") {
+          if (typeof geojson == "string") {
+            try {
+              JSON.parse(geojson);
+              geojson = JSON.parse(geojson);
+            } catch(e) {}
           }
+        }
+        else if (app.urlParams.src.endsWith(".csv") || app.urlParams.f == "csv") {
+          csv2geojson.csv2geojson(geojson, {
+            delimiter: "auto"
+          }, function(err, data) {
+            geojson = data;
+          });
+        }
+        else if (app.urlParams.src.endsWith(".kml") || app.urlParams.f == "kml") {
+          geojson = toGeoJSON.kml(geojson);
+        }
+        else if (app.urlParams.src.endsWith(".gpx") || app.urlParams.f == "gpx") {
+          geojson = toGeoJSON.gpx((new DOMParser()).parseFromString(geojson, "text/xml"));
         }
 
         app.totalCount = geojson.features.length;
