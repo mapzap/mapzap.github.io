@@ -463,13 +463,26 @@ var app = {
                         "background-position-x": "3px"
                       }
                     };
-                  } else {
+                  } else if (!app.urlParams.cluster) {
                     return {
                       css: {
                         "box-shadow": "inset 10px 0em " + (style.values[row[style.property]] ? style.values[row[style.property]] : "black"),
                         "padding-left": "18px"
                       }
                     };
+                  } else if (app.urlParams.cluster) {
+                    return {
+                      css: {
+                        "background-image": "url(" + (style.values[row[style.property]] ? style.values[row[style.property]] : "assets/img/spotlight-poi.png") + ")",
+                        "background-repeat": "no-repeat",
+                        "background-size": "16px",
+                        "padding-left": "22px",
+                        "background-position": "left center",
+                        "background-position-x": "3px"
+                      }
+                    };
+                  } else {
+                    return "";
                   }
                 };
               }
