@@ -163,6 +163,7 @@ var app = {
         if (style.property && style.values) {
           var value = feature.getProperty(style.property);
           style = {
+            zIndex: 1,
             fillColor: style.values[value] ? style.values[value] : "white",
             fillOpacity: 0.2,
             strokeColor: style.values[value] ? style.values[value] : "white",
