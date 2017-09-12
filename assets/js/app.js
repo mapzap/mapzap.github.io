@@ -164,7 +164,7 @@ var app = {
           var value = feature.getProperty(style.property);
           style = {
             zIndex: 1,
-            fillColor: style.values[value] ? style.values[value] : "white",
+            fillColor: style.values[value] ? style.values[value] : "black",
             fillOpacity: 0.2,
             strokeColor: style.values[value] ? style.values[value] : "white",
             strokeOpacity: 1,
@@ -174,7 +174,7 @@ var app = {
               scale: 5,
               strokeColor: "white",
               strokeWeight: 1,
-              fillColor: style.values[value] ? style.values[value] : "white",
+              fillColor: style.values[value] ? style.values[value] : "black",
               fillOpacity: 0.9
             }
           };
@@ -437,7 +437,7 @@ var app = {
                   } else {
                     return {
                       css: {
-                        "box-shadow": "inset 10px 0em " + (style.values[row[style.property]] ? style.values[row[style.property]] : "white"),
+                        "box-shadow": "inset 10px 0em " + (style.values[row[style.property]] ? style.values[row[style.property]] : "black"),
                         "padding-left": "18px"
                       }
                     };
