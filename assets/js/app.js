@@ -104,6 +104,7 @@ var app = {
         stylers: [{visibility: "off"}]
       }],
       fullscreenControl: false,
+      zoomControl: "ontouchstart" in document.documentElement ? false : true,
       mapTypeId: app.urlParams.map ? app.urlParams.map : "roadmap"
     });
 
