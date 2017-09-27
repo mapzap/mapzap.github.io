@@ -513,7 +513,7 @@ var app = {
       search: true,
       trimOnSearch: false,
       searchAlign: "left",
-      showColumns: true,
+      showColumns: false,
       showToggle: false,
       buttonsAlign: "left",
       columns: columns,
