@@ -105,6 +105,10 @@ var app = {
       }],
       fullscreenControl: false,
       zoomControl: "ontouchstart" in document.documentElement ? false : true,
+      mapTypeControl: true,
+      mapTypeControlOptions: {
+        style: google.maps.MapTypeControlStyle.DROPDOWN_MENU
+      },
       mapTypeId: app.urlParams.map ? app.urlParams.map : "roadmap"
     });
 
