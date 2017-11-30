@@ -331,7 +331,7 @@ var app = {
         app.map.fitBounds(place.geometry.viewport);
       }
       app.infoWindow.setPosition(place.geometry.location);
-      app.infoWindow.setContent(place.formatted_address);
+      app.infoWindow.setContent("<div class='text-center'><strong>" + place.formatted_address + "</strong><div class='place-coordinates'>" + place.geometry.location.lat().toFixed(6) + ", " + place.geometry.location.lng().toFixed(6) + "</div></div>");
       app.infoWindow.open(app.map);
     } else if (place.name) {
       app.geocodeAddress(place.name);
