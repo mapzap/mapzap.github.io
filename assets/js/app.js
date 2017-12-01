@@ -94,6 +94,12 @@ var app = {
   },
 
   buildMap: function() {
+    var mapTypeIds = [];
+    for(var type in google.maps.MapTypeId) {
+      mapTypeIds.push(google.maps.MapTypeId[type]);
+    }
+    mapTypeIds.push("OSM");
+
     app.map = new google.maps.Map(document.getElementById("map"), {
       styles: [{
         featureType: "poi",
@@ -107,10 +113,26 @@ var app = {
       zoomControl: "ontouchstart" in document.documentElement ? false : true,
       mapTypeControl: true,
       mapTypeControlOptions: {
-        style: google.maps.MapTypeControlStyle.DROPDOWN_MENU
+        style: google.maps.MapTypeControlStyle.DROPDOWN_MENU,
+        mapTypeIds: mapTypeIds
       },
-      mapTypeId: app.urlParams.map ? app.urlParams.map : "roadmap"
+      mapTypeId: app.urlParams.map ? app.urlParams.map : "roadmap",
     });
+
+    app.map.mapTypes.set("OSM", new google.maps.ImageMapType({
+      getTileUrl: function(coord, zoom) {
+        return "http://tile.openstreetmap.org/" + zoom + "/" + coord.x + "/" + coord.y + ".png";
+      },
+      tileSize: new google.maps.Size(256, 256),
+      name: "OSM",
+      maxZoom: 18
+    }));
+
+    var OSMattribution = document.createElement("div");
+    OSMattribution.id = "OSMattribution";
+    OSMattribution.innerHTML = "<div class='text-center' style='margin-bottom: 15px; margin-right: -40px; color: white; text-shadow: black 0.1em 0.1em 0.2em'>© <a href='https://www.openstreetmap.org/copyright' target='_blank' style='color: white; text-decoration: none;'>OpenStreetMap contributors</a></div>";
+    OSMattribution.style.display = "none";
+    app.map.controls[google.maps.ControlPosition.BOTTOM_RIGHT].push(OSMattribution);
 
     app.selectedFeature = new google.maps.Data({
       map: app.map,
@@ -141,6 +163,14 @@ var app = {
 
     app.map.addListener("dragstart", function(event) {
       $("input").blur();
+    });
+
+    app.map.addListener("maptypeid_changed", function(event) {
+      if (app.map.getMapTypeId() == "OSM") {
+        $("#OSMattribution").show();
+      } else {
+        $("#OSMattribution").hide();
+      }
     });
 
     app.autocomplete.addListener("place_changed", function() {
