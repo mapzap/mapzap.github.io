@@ -134,6 +134,11 @@ var app = {
     OSMattribution.style.display = "none";
     app.map.controls[google.maps.ControlPosition.BOTTOM_RIGHT].push(OSMattribution);
 
+    app.map.mapTypes.set('Dark', new google.maps.StyledMapType(darkMatter, {
+      name: 'Dark'
+    }))
+    mapTypeIds.push('Dark')
+
     app.selectedFeature = new google.maps.Data({
       map: app.map,
       style: {
