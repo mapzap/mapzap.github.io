@@ -41,7 +41,7 @@ You can also download or fork this repo and host your own version. If you self-h
 | Parameter     | Options                     | Description                                             | Required | Default           |
 | ------------- | --------------------------- | ------------------------------------------------------- | -------- | ----------------- |
 | _src_         | GeoJSON or CSV              | URL to web accessible GeoJSON or CSV file               | True     | NA                |
-| _title_       | Any string                  | navbar, app title                                       | False    | Mapps Data Viewer |
+| _title_       | Any string                  | navbar, app title                                       | False    | Mapzap            |
 | _icon_        | Image (PNG, JPG)            | URL to accessible image for custom navbar icon          | False    | NA                |
 | _fields_      | Any valid properties        | Comma separated list of specific properties to show     | False    | All               |
 | _sortfield_   | Any valid property          | Initially sort table by this column                     | False    | NA                |
