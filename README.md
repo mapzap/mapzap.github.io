@@ -30,26 +30,27 @@ You can also download or fork this repo and host your own version. If you self-h
 
 ### Examples
 
-- [DC WiFi Social](https://mapzap.github.io/?src=https://raw.githubusercontent.com/benbalter/dc-wifi-social/master/bars.geojson&fields=name,address&title=DC%20WiFi%20Social&sortfield=name&attribution=https://github.com/benbalter/dc-wifi-social) A GitHub based collaborative list of DC locations that serve up both Internet and Alcohol from [Ben Balter](https://github.com/benbalter/dc-wifi-social)
-- [US States](https://mapzap.github.io/?src=https%3A%2F%2Fd2ad6b4ur7yvpq.cloudfront.net%2Fnaturalearth-3.3.0%2Fne_110m_admin_1_states_provinces_shp.geojson&icon=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fen%2Fthumb%2Fa%2Fa4%2FFlag_of_the_United_States.svg%2F320px-Flag_of_the_United_States.svg.png&title=US%20States&fields=region%2Cname%2Cname_alt%2Cadm1_code%2Cwikipedia&attribution=http%3A%2F%2Fgeojson.xyz&map=roadmap&sortfield=name&sortorder=asc&style=%7B%0A%20%20%22property%22%3A%20%22region%22%2C%0A%20%20%22values%22%3A%20%7B%0A%20%20%20%20%22West%22%3A%20%22%23DA0796%22%2C%0A%20%20%20%20%22South%22%3A%20%22%23CB0D0C%22%2C%0A%20%20%20%20%22Northeast%22%3A%20%22%23FF8819%22%2C%0A%20%20%20%20%22Midwest%22%3A%20%22%23FFD300%22%0A%20%20%7D%0A%7D) Natural Earth _admin 1 states provinces shp_ data from [http://geojson.xyz/](http://geojson.xyz/)
-- [Football Clubs of Europe](https://mapzap.github.io/?src=https://web.fulcrumapp.com/shares/82982e4c55707a34.geojson&fields=name,full_name,ground,league,city,state_province,country,photo&title=Football%20Clubs%20of%20Europe&sortfield=name&attribution=Courtesy%20of%20Coleman%20McCormick) A Fulcrum mapping project from [Coleman McCormick](https://github.com/colemanm/)
-- [NYC Coffee Shops](https://mapzap.github.io/?src=https://api.tiles.mapbox.com/v3/mapbox.o11ipb8h/markers.geojson&fields=name,description&title=NYC%20Coffee%20Shops&sortfield=name&attribution=Courtesy%20of%20Mapbox) via [Mapbox](https://www.mapbox.com/blog/open-web-geojson/)
-- [Baseball Parks](https://mapzap.github.io/?src=https://raw.githubusercontent.com/cageyjames/GeoJSON-Ballparks/master/ballparks.geojson&fields=Ballpark,Team,League,Class&title=GeoJSON%20Ballparks&sortfield=Ballpark&attribution=https://github.com/cageyjames/GeoJSON-Ballparks&style={%22icon%22:{%22path%22:0,%22scale%22:4,%22strokeColor%22:%22white%22,%22strokeWeight%22:1,%22fillColor%22:%22orange%22,%22fillOpacity%22:1}}) A GeoJSON Ballpark mapping project from [James Fee](https://github.com/cageyjames/GeoJSON-Ballparks)
+- [DC WiFi Social](https://mapzap.github.io/?src=https://raw.githubusercontent.com/benbalter/dc-wifi-social/master/bars.geojson&fields=name,address&title=DC%20WiFi%20Social&sort=name&attribution=https://github.com/benbalter/dc-wifi-social) A GitHub based collaborative list of DC locations that serve up both Internet and Alcohol from [Ben Balter](https://github.com/benbalter/dc-wifi-social)
+- [US States](https://mapzap.github.io/?src=https%3A%2F%2Fd2ad6b4ur7yvpq.cloudfront.net%2Fnaturalearth-3.3.0%2Fne_110m_admin_1_states_provinces_shp.geojson&icon=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fen%2Fthumb%2Fa%2Fa4%2FFlag_of_the_United_States.svg%2F320px-Flag_of_the_United_States.svg.png&title=US%20States&fields=region%2Cname%2Cname_alt%2Cadm1_code%2Cwikipedia&attribution=http%3A%2F%2Fgeojson.xyz&map=roadmap&hover=name&sortf=name&order=asc&style=%7B%0A%20%20%22property%22%3A%20%22region%22%2C%0A%20%20%22values%22%3A%20%7B%0A%20%20%20%20%22West%22%3A%20%22%23DA0796%22%2C%0A%20%20%20%20%22South%22%3A%20%22%23CB0D0C%22%2C%0A%20%20%20%20%22Northeast%22%3A%20%22%23FF8819%22%2C%0A%20%20%20%20%22Midwest%22%3A%20%22%23FFD300%22%0A%20%20%7D%0A%7D) Natural Earth _admin 1 states provinces shp_ data from [http://geojson.xyz/](http://geojson.xyz/)
+- [Football Clubs of Europe](https://mapzap.github.io/?src=https://web.fulcrumapp.com/shares/82982e4c55707a34.geojson&fields=name,full_name,ground,league,city,state_province,country,photo&hover=name,league&title=Football%20Clubs%20of%20Europe&sort=name&attribution=Courtesy%20of%20Coleman%20McCormick) A Fulcrum mapping project from [Coleman McCormick](https://github.com/colemanm/)
+- [NYC Coffee Shops](https://mapzap.github.io/?src=https://api.tiles.mapbox.com/v3/mapbox.o11ipb8h/markers.geojson&fields=name,description&hover=name&title=NYC%20Coffee%20Shops&sort=name&attribution=Courtesy%20of%20Mapbox) via [Mapbox](https://www.mapbox.com/blog/open-web-geojson/)
+- [Baseball Parks](https://mapzap.github.io/?src=https://raw.githubusercontent.com/cageyjames/GeoJSON-Ballparks/master/ballparks.geojson&fields=Ballpark,Team,League,Class&hover=Ballpark,Team&title=GeoJSON%20Ballparks&sort=Ballpark&attribution=https://github.com/cageyjames/GeoJSON-Ballparks&style={%22icon%22:{%22path%22:0,%22scale%22:4,%22strokeColor%22:%22white%22,%22strokeWeight%22:1,%22fillColor%22:%22orange%22,%22fillOpacity%22:1}}) A GeoJSON Ballpark mapping project from [James Fee](https://github.com/cageyjames/GeoJSON-Ballparks)
 
 ### URL Parameters
 
-| Parameter     | Options                     | Description                                                  | Required | Default           |
-| ------------- | --------------------------- | ------------------------------------------------------------ | -------- | ----------------- |
-| _src_         | GeoJSON or CSV              | URL to web accessible GeoJSON or CSV file                    | True     | NA                |
-| _title_       | Any string                  | navbar, app title                                            | False    | Mapzap            |
-| _icon_        | Image (PNG, JPG)            | URL to accessible image for custom navbar icon               | False    | NA                |
-| _fields_      | Any valid properties        | Comma separated list of specific properties to show in table | False    | All               |
-| _infofields_  | Any valid properties        | Comma separated list of specific properties to show on hover | False    | NA                |
-| _sortfield_   | Any valid property          | Initially sort table by this column                          | False    | NA                |
-| _sortorder_   | asc / desc                  | Initial column sort order                                    | False    | asc               |
-| _attribution_ | Any string (URLs supported) | Source attribution added to text in bottom right of map      | False    | NA                |
-| _map_         | Any valid map type          | Google map type (roadmap, satellite, hybrid, terrain)        | False    | roadmap           |
-| _style_       | JSON style options          | Feature style rules- see examples below                      | False    | `{fillColor:"red","fillOpacity":"0.2","strokeColor":"red","strokeOpacity":"1","strokeWeight":"2"}` |
+| Parameter     | Options                     | Description                                                    | Required | Default           |
+| ------------- | --------------------------- | -------------------------------------------------------------- | -------- | ----------------- |
+| _src_         | GeoJSON or CSV              | URL to web accessible GeoJSON or CSV file                      | True     | NA                |
+| _title_       | Any string                  | navbar, app title                                              | False    | Mapzap            |
+| _icon_        | Image (PNG, JPG)            | URL to accessible image for custom navbar icon                 | False    | NA                |
+| _fields_      | Any valid properties        | Comma separated list of specific properties available in table | False    | All               |
+| _hidden_      | Any valid properties        | Comma separated list of specific properties to hide in table   | False    | All               |
+| _hover_       | Any valid properties        | Comma separated list of specific properties to show on hover   | False    | NA                |
+| _sort_        | Any valid property          | Initially sort table by this column                            | False    | NA                |
+| _order_       | asc / desc                  | Initial column sort order                                      | False    | asc               |
+| _attribution_ | Any string (URLs supported) | Source attribution added to text in bottom right of map        | False    | NA                |
+| _map_         | Any valid map type          | Google map type (roadmap, satellite, hybrid, terrain)          | False    | roadmap           |
+| _style_       | JSON style options          | Feature style rules- see examples below                        | False    | `{fillColor:"red","fillOpacity":"0.2","strokeColor":"red","strokeOpacity":"1","strokeWeight":"2"}` |
 
 ### JSON Style Options
 

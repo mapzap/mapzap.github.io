@@ -91,6 +91,10 @@ var app = {
         app.userFields.push(field);
       });
     }
+
+    if (app.urlParams.hidden) {
+      app.hidden = app.urlParams.hidden.split(",");
+    }
   },
 
   buildMap: function() {
@@ -219,8 +223,8 @@ var app = {
     });
 
     app.map.data.addListener("mouseover", function(event) {
-      if (app.urlParams.infofields) {
-        var fields = app.urlParams.infofields.split(",");
+      if (app.urlParams.hover) {
+        var fields = app.urlParams.hover.split(",");
         var value = fields.map(function(field) {
           return event.feature.getProperty(field);
         });
@@ -464,7 +468,7 @@ var app = {
             sortable: true,
             align: "left",
             valign: "middle",
-            visible: (column == "_id_") ? false : true,
+            visible: (app.hidden && app.hidden.indexOf(column) !== -1 || column == "_id_") ? false : true,
             formatter: app.formatProperty
           });
         });
@@ -560,12 +564,12 @@ var app = {
       striped: false,
       pagination: false,
       minimumCountColumns: 1,
-      sortName: app.urlParams.sortfield ? app.urlParams.sortfield : "_id_",
-      sortOrder: app.urlParams.sortorder ? app.urlParams.sortorder : "asc",
+      sortName: app.urlParams.sort ? app.urlParams.sort : "_id_",
+      sortOrder: app.urlParams.order ? app.urlParams.order : "asc",
       search: true,
       trimOnSearch: false,
       searchAlign: "left",
-      showColumns: false,
+      showColumns: true,
       showToggle: false,
       buttonsAlign: "left",
       columns: columns,
