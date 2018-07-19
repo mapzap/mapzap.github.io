@@ -38,17 +38,18 @@ You can also download or fork this repo and host your own version. If you self-h
 
 ### URL Parameters
 
-| Parameter     | Options                     | Description                                             | Required | Default           |
-| ------------- | --------------------------- | ------------------------------------------------------- | -------- | ----------------- |
-| _src_         | GeoJSON or CSV              | URL to web accessible GeoJSON or CSV file               | True     | NA                |
-| _title_       | Any string                  | navbar, app title                                       | False    | Mapzap            |
-| _icon_        | Image (PNG, JPG)            | URL to accessible image for custom navbar icon          | False    | NA                |
-| _fields_      | Any valid properties        | Comma separated list of specific properties to show     | False    | All               |
-| _sortfield_   | Any valid property          | Initially sort table by this column                     | False    | NA                |
-| _sortorder_   | asc / desc                  | Initial column sort order                               | False    | asc               |
-| _attribution_ | Any string (URLs supported) | Source attribution added to text in bottom right of map | False    | NA                |
-| _map_         | Any valid map type          | Google map type (roadmap, satellite, hybrid, terrain)   | False    | roadmap           |
-| _style_       | JSON style options          | Feature style rules- see examples below                 | False    | `{fillColor:"red","fillOpacity":"0.2","strokeColor":"red","strokeOpacity":"1","strokeWeight":"2"}` |
+| Parameter     | Options                     | Description                                                  | Required | Default           |
+| ------------- | --------------------------- | ------------------------------------------------------------ | -------- | ----------------- |
+| _src_         | GeoJSON or CSV              | URL to web accessible GeoJSON or CSV file                    | True     | NA                |
+| _title_       | Any string                  | navbar, app title                                            | False    | Mapzap            |
+| _icon_        | Image (PNG, JPG)            | URL to accessible image for custom navbar icon               | False    | NA                |
+| _fields_      | Any valid properties        | Comma separated list of specific properties to show in table | False    | All               |
+| _infofields_  | Any valid properties        | Comma separated list of specific properties to show on hover | False    | NA                |
+| _sortfield_   | Any valid property          | Initially sort table by this column                          | False    | NA                |
+| _sortorder_   | asc / desc                  | Initial column sort order                                    | False    | asc               |
+| _attribution_ | Any string (URLs supported) | Source attribution added to text in bottom right of map      | False    | NA                |
+| _map_         | Any valid map type          | Google map type (roadmap, satellite, hybrid, terrain)        | False    | roadmap           |
+| _style_       | JSON style options          | Feature style rules- see examples below                      | False    | `{fillColor:"red","fillOpacity":"0.2","strokeColor":"red","strokeOpacity":"1","strokeWeight":"2"}` |
 
 ### JSON Style Options
 

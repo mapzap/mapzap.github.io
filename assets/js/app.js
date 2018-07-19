@@ -218,6 +218,24 @@ var app = {
       return (style);
     });
 
+    app.map.data.addListener("mouseover", function(event) {
+      if (app.urlParams.infofields) {
+        var fields = app.urlParams.infofields.split(",");
+        var value = fields.map(function(field) {
+          return event.feature.getProperty(field);
+        });
+        $("#info-box").html(value.join(" | "));
+        $("#info-box").show();
+      } else {
+        $("#info-box").hide();
+      }
+    });
+
+    app.map.data.addListener("mouseout", function(event) {
+      $("#info-box").html("");
+      $("#info-box").hide();
+    });
+
     app.map.data.addListener("click", function(event) {
       app.clickFeature(event.feature);
     });

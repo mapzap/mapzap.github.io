@@ -36,6 +36,17 @@ body {
 #feature-info table th {
   vertical-align: middle;
 }
+#info-box {
+  display: none;
+  position: absolute;
+  top: 60px;
+  right: 10px;
+  background-color: rgb(255, 255, 255);
+  padding: 8px;
+  border-radius: 2px;
+  font-size: 11px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px;
+}
 .place-coordinates {
   padding-top: 5px;
 }
