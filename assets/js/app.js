@@ -15,6 +15,7 @@ var app = {
   }),
 
   init: function() {
+    this.resize();
     this.bindUIActions();
     this.loadURLparams();
     this.buildMap();
@@ -24,25 +25,40 @@ var app = {
       $("#table").bootstrapTable("resetView", {
         height: $("#table-container").height()
       });
+      app.resize();
       google.maps.event.trigger(map, "resize");
     });
+  },
+
+  resize: function() {
+    $("body").css("padding-top", $(".navbar").css("height"));
   },
 
   bindUIActions: function() {
     $("#extent-btn").click(function() {
       app.map.fitBounds(app.bounds);
-      $(".navbar-collapse.in").collapse("hide");
+      $(".navbar-collapse").collapse("hide");
       return false;
+    });
+
+    $("#download-btn").click(function() {
+      $(".navbar-collapse").collapse("hide");
     });
 
     $("#legend-btn").click(function() {
       $("#legend-modal").modal("show");
-      $(".navbar-collapse.in").collapse("hide");
+      $(".navbar-collapse").collapse("hide");
       return false;
     });
 
+    $("#copy-url-btn").click(function() {
+      var copyText = $("#url-input")[0];
+      copyText.select();
+      document.execCommand("copy");
+      alert("Link copied!");
+    });
+
     $("[name='view']").click(function() {
-      $(".in,.open").removeClass("in open");
       if (this.id === "split-view-btn") {
         app.switchView("split");
         return false;
@@ -75,12 +91,12 @@ var app = {
       app.fetchData(decodeURIComponent(app.urlParams.src));
       $("#download-btn").attr("href", app.urlParams.src);
     } else {
-      window.location = window.location.href + "build.html";
+      //window.location = window.location.href + "build.html";
       return false;
     }
 
     if (app.urlParams.icon && app.urlParams.icon.length > 0) {
-      $("#navbar-title").prepend("<img src='" + decodeURIComponent(app.urlParams.icon) + "'>");
+      $("#navbar-title").prepend("<img src='" + decodeURIComponent(app.urlParams.icon) + "' height='32' class='d-inline-block align-middle mr-3'>");
       $("[name=icon]").attr("href", decodeURIComponent(app.urlParams.icon));
     }
 
@@ -337,7 +353,7 @@ var app = {
   },
 
   clickFeature: function(feature) {
-    var content = "<table class='table table-striped table-bordered table-condensed'>";
+    var content = "<table class='table table-striped table-bordered table-sm'>";
     if (app.userFields.length > 0) {
       $.each(app.userFields, function(index, prop) {
         val = app.formatProperty(feature.getProperty(prop));
@@ -361,9 +377,13 @@ var app = {
 
     app.selectFeature(feature);
 
-    $("#share-btn").click(function() {
-      app.buildShareLink(feature);
+    app.urlParams.id = feature.getId();
+    var params = {};
+    $.each(app.urlParams, function(key, value) {
+      params[key] = decodeURIComponent(value);
     });
+    var link = location.origin + location.pathname + "?" + $.param(params).replace(/\+/g, "%20");
+    $("#url-input").val(link);
   },
 
   selectFeature: function(feature){
@@ -388,7 +408,7 @@ var app = {
     } else if (place.name) {
       app.geocodeAddress(place.name);
     }
-    $(".in,.open").removeClass("in open");
+    $(".navbar-collapse").collapse("hide");
   },
 
   geocodeAddress: function(address) {
@@ -408,6 +428,7 @@ var app = {
         alert("Geocode was not successful for the following reason: " + status);
       }
     });
+    $(".navbar-collapse").collapse("hide");
   },
 
   fetchData: function(src) {
@@ -476,7 +497,7 @@ var app = {
         if (app.urlParams.style) {
           var style = JSON.parse(decodeURIComponent(app.urlParams.style));
           if (style.property && style.values) {
-            $("#legend-item").removeClass("hidden");
+            $("#legend-item").attr("hidden", null);
             $("#legend-title").html(style.property.toUpperCase().replace(/_/g, " "));
             $.each(style.values, function(property, value) {
               if (value.startsWith("http")) {
@@ -611,28 +632,11 @@ var app = {
       }
     });
 
-    $(".fixed-table-toolbar").append("<div class='columns columns-left pull-left text-muted' style='padding-left: 10px;'><span id='feature-count'></span> / <span id='total-count'></span></div>");
+    $(".fixed-table-toolbar button").addClass("btn-light");
+    $(".search input").attr("placeholder", "Filter Data");
+    $(".fixed-table-toolbar").append("<div class='columns columns-right pull-right text-muted'><span id='feature-count'></span> / <span id='total-count'></span></div>");
     $("#feature-count").html(data.length);
     $("#total-count").html(data.length);
-  },
-
-  buildShareLink: function(feature) {
-    app.urlParams.id = feature.getId();
-    var params = {};
-    $.each(app.urlParams, function(key, value) {
-      params[key] = decodeURIComponent(value);
-    });
-    var link = location.origin + location.pathname + "?" + $.param(params).replace(/\+/g, "%20");
-    if (feature.getGeometry().getType() == "Point") {
-      var LatLng = feature.getGeometry().get();
-      $("#share-maps").parent().removeClass("hidden");
-      $("#share-maps").attr("href", "https://www.google.com/maps/dir/?api=1&destination=" + LatLng.lat() + "," + LatLng.lng());
-    } else {
-      $("#share-maps").parent().addClass("hidden");
-    }
-    $("#share-hyperlink").attr("href", link);
-    $("#share-twitter").attr("href", "https://twitter.com/intent/tweet?url=" + encodeURIComponent(link));
-    $("#share-facebook").attr("href", "https://facebook.com/sharer.php?u=" + encodeURIComponent(link));
   },
 
   zoomToFeature: function(feature) {
@@ -671,6 +675,9 @@ var app = {
       $("#map-container").hide();
       $(window).resize();
     }
+    $("#view-dropdown").dropdown("toggle");
+    $(".navbar-collapse").removeClass("show");
+    app.resize();
   }
 };
 
