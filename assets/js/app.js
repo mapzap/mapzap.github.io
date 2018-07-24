@@ -73,43 +73,38 @@ var app = {
   },
 
   loadURLparams: function() {
-    if (location.search) {
-      var parts = location.search.substring(1).split("&");
-      for (var i = 0; i < parts.length; i++) {
-        var nv = parts[i].split("=");
-        if (!nv[0]) continue;
-        app.urlParams[nv[0]] = nv[1] || true;
-      }
-    }
+    app.urlParams = new URLSearchParams(window.location.search);
 
-    if (app.urlParams.title && app.urlParams.title.length > 0) {
-      var title = decodeURI(app.urlParams.title);
+    if (app.urlParams.has("title")) {
+      var title = app.urlParams.get("title");
       $("[name='title']").html(title);
     }
 
-    if (app.urlParams.src) {
-      app.fetchData(decodeURIComponent(app.urlParams.src));
-      $("#download-btn").attr("href", app.urlParams.src);
+    if (app.urlParams.has("src")) {
+      var src = app.urlParams.get("src");
+      app.fetchData(src);
+      $("#download-btn").attr("href", src);
     } else {
-      //window.location = window.location.href + "build.html";
+      window.location = window.location.href + "build.html";
       return false;
     }
 
-    if (app.urlParams.icon && app.urlParams.icon.length > 0) {
-      $("#navbar-title").prepend("<img src='" + decodeURIComponent(app.urlParams.icon) + "' height='32' class='d-inline-block align-middle mr-3'>");
-      $("[name=icon]").attr("href", decodeURIComponent(app.urlParams.icon));
+    if (app.urlParams.has("icon")) {
+      var icon = app.urlParams.get("icon");
+      $("#navbar-title").prepend("<img src='" + icon + "' height='32' class='d-inline-block align-middle mr-3'>");
+      $("[name=icon]").attr("href", icon);
     }
 
-    if (app.urlParams.fields) {
-      app.fields = decodeURIComponent(app.urlParams.fields).split(",");
+    if (app.urlParams.has("fields")) {
+      app.fields = app.urlParams.get("fields").split(",");
       $.each(app.fields, function(index, field) {
         field = decodeURI(field);
         app.userFields.push(field);
       });
     }
 
-    if (app.urlParams.hidden) {
-      app.hidden = app.urlParams.hidden.split(",");
+    if (app.urlParams.has("hidden")) {
+      app.hidden = app.urlParams.get("hidden").split(",");
     }
   },
 
@@ -136,7 +131,7 @@ var app = {
         style: google.maps.MapTypeControlStyle.DROPDOWN_MENU,
         mapTypeIds: mapTypeIds
       },
-      mapTypeId: app.urlParams.map ? app.urlParams.map : "roadmap",
+      mapTypeId: app.urlParams.has("map") ?app.urlParams.get("map") : "roadmap",
     });
 
     app.map.mapTypes.set("OSM", new google.maps.ImageMapType({
@@ -162,12 +157,12 @@ var app = {
         fillColor: "#00ffff",
         fillOpacity: 0,
         strokeColor: "#00ffff",
-        strokeWeight: (app.urlParams.style && JSON.parse(decodeURIComponent(app.urlParams.style)).strokeWeight) ? JSON.parse(decodeURIComponent(app.urlParams.style)).strokeWeight : 2,
+        strokeWeight: (app.urlParams.has("style") && JSON.parse(app.urlParams.get("style")).strokeWeight) ? JSON.parse(app.urlParams.get("style")).strokeWeight : 2,
         icon: {
           path: google.maps.SymbolPath.CIRCLE,
-          scale: (app.urlParams.style && JSON.parse(decodeURIComponent(app.urlParams.style)).icon && JSON.parse(decodeURIComponent(app.urlParams.style)).icon.scale) ? JSON.parse(decodeURIComponent(app.urlParams.style)).icon.scale : 5,
+          scale: (app.urlParams.has("style") && JSON.parse(app.urlParams.get("style")).icon && JSON.parse(app.urlParams.get("style")).icon.scale) ? JSON.parse(app.urlParams.get("style")).icon.scale : 5,
           strokeColor: "white",
-          strokeWeight: (app.urlParams.style && JSON.parse(decodeURIComponent(app.urlParams.style)).icon && JSON.parse(decodeURIComponent(app.urlParams.style)).icon.strokeWeight) ? JSON.parse(decodeURIComponent(app.urlParams.style)).icon.strokeWeight : 1,
+          strokeWeight: (app.urlParams.has("style") && JSON.parse(app.urlParams.get("style")).icon && JSON.parse(app.urlParams.get("style")).icon.strokeWeight) ? JSON.parse(app.urlParams.get("style")).icon.strokeWeight : 1,
           fillColor: "#00ffff",
           fillOpacity: 0.9
         }
@@ -212,8 +207,8 @@ var app = {
         strokeWeight: 2
       };
 
-      if (app.urlParams.style) {
-        style = JSON.parse(decodeURIComponent(app.urlParams.style));
+      if (app.urlParams.has("style")) {
+        style = JSON.parse(app.urlParams.get("style"));
 
         if (style.property && style.values) {
           var value = feature.getProperty(style.property);
@@ -239,8 +234,8 @@ var app = {
     });
 
     app.map.data.addListener("mouseover", function(event) {
-      if (app.urlParams.hover) {
-        var fields = app.urlParams.hover.split(",");
+      if (app.urlParams.has("hover")) {
+        var fields = app.urlParams.get("hover").split(",");
         var value = fields.map(function(field) {
           return event.feature.getProperty(field);
         });
@@ -260,8 +255,8 @@ var app = {
       app.clickFeature(event.feature);
     });
 
-    if (app.urlParams.attribution) {
-      var attribution = decodeURIComponent(app.urlParams.attribution);
+    if (app.urlParams.has("attribution")) {
+      var attribution = decodeURIComponent(app.urlParams.get("attribution"));
       var attributionDiv = document.createElement("div");
       if (attribution.startsWith("http")) {
         attribution = "<a href='" + attribution + "' target='_blank' style='color: rgb(68, 68, 68); text-decoration: none;'>" + attribution + "</a>";
@@ -376,13 +371,8 @@ var app = {
     $("#feature-modal").modal("show");
 
     app.selectFeature(feature);
-
-    app.urlParams.id = feature.getId();
-    var params = {};
-    $.each(app.urlParams, function(key, value) {
-      params[key] = decodeURIComponent(value);
-    });
-    var link = location.origin + location.pathname + "?" + $.param(params).replace(/\+/g, "%20");
+    app.urlParams.append("id", feature.getId());
+    var link = location.origin + location.pathname + "?" + app.urlParams.toString();
     $("#url-input").val(link);
   },
 
@@ -439,7 +429,7 @@ var app = {
       type: "GET",
       url: src,
       success: function(geojson, status, xhr) {
-        if (app.urlParams.src.endsWith(".geojson") || app.urlParams.f == "geojson") {
+        if (app.urlParams.get("src").endsWith(".geojson") ||app.urlParams.get("f") == "geojson") {
           if (typeof geojson == "string") {
             try {
               JSON.parse(geojson);
@@ -447,17 +437,17 @@ var app = {
             } catch(e) {}
           }
         }
-        else if (app.urlParams.src.endsWith(".csv") || app.urlParams.f == "csv") {
+        else if (app.urlParams.get("src").endsWith(".csv") || app.urlParams.get("f") == "csv") {
           csv2geojson.csv2geojson(geojson, {
             delimiter: "auto"
           }, function(err, data) {
             geojson = data;
           });
         }
-        else if (app.urlParams.src.endsWith(".kml") || app.urlParams.f == "kml") {
+        else if (app.urlParams.get("src").endsWith(".kml") || app.urlParams.get("f") == "kml") {
           geojson = toGeoJSON.kml(geojson);
         }
-        else if (app.urlParams.src.endsWith(".gpx") || app.urlParams.f == "gpx") {
+        else if (app.urlParams.get("src").endsWith(".gpx") || app.urlParams.get("f") == "gpx") {
           geojson = toGeoJSON.gpx((new DOMParser()).parseFromString(geojson, "text/xml"));
         }
 
@@ -494,8 +484,8 @@ var app = {
           });
         });
 
-        if (app.urlParams.style) {
-          var style = JSON.parse(decodeURIComponent(app.urlParams.style));
+        if (app.urlParams.has("style")) {
+          var style = JSON.parse(app.urlParams.get("style"));
           if (style.property && style.values) {
             $("#legend-item").attr("hidden", null);
             $("#legend-title").html(style.property.toUpperCase().replace(/_/g, " "));
@@ -548,8 +538,8 @@ var app = {
       });
 
       // if feature id paramater present, zoom to feature
-      if (app.urlParams.id && app.urlParams.id.length > 0) {
-        var feature = app.map.data.getFeatureById(app.urlParams.id);
+      if (app.urlParams.has("id") && app.urlParams.get("id").length > 0) {
+        var feature = app.map.data.getFeatureById(app.urlParams.get("id"));
         var featureBounds = new google.maps.LatLngBounds();
         feature.getGeometry().forEachLatLng(function(latLng){
           featureBounds.extend(latLng);
@@ -565,7 +555,7 @@ var app = {
 
         // trigger click to pop up modal and highlight feature
         google.maps.event.trigger(app.map.data, "click", {
-          feature: app.map.data.getFeatureById(app.urlParams.id)
+          feature: app.map.data.getFeatureById(app.urlParams.get("id"))
         });
 
       // if no id parameter passed, zoom to all features
