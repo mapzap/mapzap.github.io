@@ -451,7 +451,12 @@ var app = {
           geojson = toGeoJSON.gpx((new DOMParser()).parseFromString(geojson, "text/xml"));
         }
 
-        app.totalCount = geojson.features.length;
+        if (app.urlParams.has("where")) {
+          alasql("SELECT * FROM ? WHERE " + app.urlParams.get("where"), [geojson.features], function(features){
+        		geojson.features = features;
+        	});
+        }
+
         $.each(geojson.features, function(index, feature) {
           feature.id = index+1;
           feature.properties._id_ = index+1;
@@ -575,8 +580,8 @@ var app = {
       striped: false,
       pagination: false,
       minimumCountColumns: 1,
-      sortName: app.urlParams.sort ? app.urlParams.sort : "_id_",
-      sortOrder: app.urlParams.order ? app.urlParams.order : "asc",
+      sortName: app.urlParams.has("sort") ? app.urlParams.get("sort") : "_id_",
+      sortOrder: app.urlParams.has("order") ? app.urlParams.get("order") : "asc",
       search: true,
       trimOnSearch: false,
       searchAlign: "left",
@@ -679,12 +684,4 @@ $(document).ready(function() {
       return false;
     }
   });
-});
-
-$(document).ajaxStart(function(){
-  $("#loading-mask").show();
-});
-
-$(document).ajaxStop(function(){
-  $("#loading-mask").hide();
 });
