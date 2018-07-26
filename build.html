@@ -8,9 +8,9 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="author" content="Bryan McBride">
     <title name="title">Mapzap Builder</title>
-    <link rel="stylesheet" href="assets/vendor/bootstrap-3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-theme/0.1.0-beta.10/select2-bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.min.css">
+    <link rel="stylesheet" href="https://angel-vladov.github.io/select2-bootstrap-theme/css/select2-bootstrap.css">
     <link rel="icon" type="image/x-icon" name="icon" href="assets/img/favicon.ico">
     <link rel="icon" sizes="196x196" name="icon" href="assets/img/favicon-196.png">
     <link rel="apple-touch-icon" sizes="76x76" name="icon" href="assets/img/favicon-76.png">
@@ -21,7 +21,7 @@
         background: #f8f8f8;
       }
       iframe {
-        border: 2px solid black;
+        border: 2px solid #343a40;
         border-radius: 6px;
         padding-bottom: 2px;
       }
@@ -48,31 +48,27 @@
   </head>
 
   <body>
-    <div class="navbar navbar-inverse navbar-static-top" role="navigation">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <span class="navbar-brand">Mapzap Builder</span>
-        </div>
-      </div>
-    </div>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+      <span class="navbar-brand">Mapzap Builder</span>
+    </nav>
 
-    <div class="container-fluid">
+    <div class="container-fluid p-3">
       <div class="row">
-        <div class="col-xs-8">
+        <div class="col-8">
           <form>
             <div class="row">
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="src">Data Source <span class="text-danger">*</span></label>
                   <input type="text" class="form-control" id="src" placeholder="https://someserver.com/data.geojson" data-title="Get started" data-content="Paste a CSV or GeoJSON URL to load the available fields." data-placement="bottom" data-trigger="focus">
-                  <p class="help-block"><span class="text-danger">*Required* URL to a web accessible GeoJSON or CSV.</span></p>
+                  <small class="form-text text-danger">*Required* URL to a web accessible GeoJSON or CSV</small>
                 </div>
               </div>
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="icon">Icon</label>
                   <input type="text" class="form-control" id="icon" placeholder="https://someserver.com/icon.png">
-                  <p class="help-block">URL to an image for use as a Navbar icon.</p>
+                  <small class="form-text text-muted">URL to an image for use as a Navbar icon</small>
                 </div>
               </div>
             </div>
@@ -81,14 +77,51 @@
                 <div class="form-group">
                   <label for="title">Title</label>
                   <input type="text" class="form-control" id="title" placeholder="My Awesome App">
-                  <p class="help-block">Used for the Navbar and homescreen app title.</p>
+                  <small class="form-text text-muted">Used for the Navbar and homescreen app title</small>
                 </div>
               </div>
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="fields">Fields</label>
-                  <select class="form-control" id="fields"></select>
-                  <p class="help-block">Fields to show. If empty, all fields will be shown.</p>
+                  <select class="form-control allfields" id="fields"></select>
+                  <small class="form-text text-muted">Fields to include. If empty, all fields will be included</small>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="hidden">Hidden Fields</label>
+                  <select class="form-control allfields" id="hidden"></select>
+                  <small class="form-text text-muted">Columns initially hidden in table</small>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="hover">Hover Fields</label>
+                  <select class="form-control allfields" id="hover"></select>
+                  <small class="form-text text-muted">Fields to when mouse hovers over map feature</small>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="sort">Sort Field</label>
+                  <select class="form-control" id="sort">
+                    <option value="" selected disabled>Select a field</option>
+                  </select>
+                  <small class="form-text text-muted">Initially sort table by this column</small>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="order">Sort Order</label>
+                  <select class="form-control" id="order">
+                    <option value="asc" selected>Ascending (asc)</option>
+                    <option value="desc">Descending (desc)</option>
+                  </select>
+                  <small class="form-text text-muted">Initial column sort order</small>
                 </div>
               </div>
             </div>
@@ -97,7 +130,7 @@
                 <div class="form-group">
                   <label for="attribution">Attribution</label>
                   <input type="text" class="form-control" id="attribution" placeholder="Data courtesy of data.gov">
-                  <p class="help-block">Source attribution added to text in bottom right of map.</p>
+                  <small class="form-text text-muted">Source attribution added to text in bottom right of map</small>
                 </div>
               </div>
               <div class="col-sm-6">
@@ -109,28 +142,16 @@
                     <option value="hybrid">Hybrid</option>
                     <option value="terrain">Terrain</option>
                   </select>
-                  <p class="help-block">Initial Google map type.</p>
+                  <small class="form-text text-muted">Initial Google map type</small>
                 </div>
               </div>
             </div>
             <div class="row">
-              <div class="col-sm-6">
+              <div class="col-sm-12">
                 <div class="form-group">
-                  <label for="sortfield">Sort Field</label>
-                  <select class="form-control" id="sortfield">
-                    <option value="" selected disabled>Select a field</option>
-                  </select>
-                  <p class="help-block">Initially sort table by this column.</p>
-                </div>
-              </div>
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <label for="sortorder">Sort Order</label>
-                  <select class="form-control" id="sortorder">
-                    <option value="asc" selected>Ascending (asc)</option>
-                    <option value="desc">Descending (desc)</option>
-                  </select>
-                  <p class="help-block">Initial column sort order.</p>
+                  <label for="attribution">Where Filter</label>
+                  <input type="text" class="form-control" id="where" placeholder="properties->condition='Excellent'">
+                  <small class="form-text text-muted">Filter features with <a href="http://alasql.org/" target="_blank">AlaSQL</a> WHERE clause</small>
                 </div>
               </div>
             </div>
@@ -144,14 +165,14 @@
               <div class="col-sm-6">
                 <div class="form-group">
                   <label>Style Info</label>
-                  <p class="help-block">Feature styling per the <a href="https://developers.google.com/maps/documentation/javascript/3.exp/reference#Data.StyleOptions" target="_blank">google.maps.Data.StyleOptions</a> object specification. You can also categorically style features by defining an object with <code>property</code> and <code>values</code> properties. Values should be an object of values and corresponding CSS3 colors or URLs to marker images.</p>
+                  <small class="form-text text-muted">Feature styling per the <a href="https://developers.google.com/maps/documentation/javascript/3.exp/reference#Data.StyleOptions" target="_blank">google.maps.Data.StyleOptions</a> object specification. You can also categorically style features by defining an object with <code>property</code> and <code>values</code> properties. Values should be an object of values and corresponding CSS3 colors or URLs to marker images.</small>
                 </div>
               </div>
             </div>
             <div class="row">
               <div class="col-sm-6">
-                <h5>Single Style (SVG symbols)</h5>
-<pre>
+                <h6>Single Style (SVG symbols)</h6>
+<pre><code>
 {
   "fillColor": "blue",
   "fillOpacity": 0.2,
@@ -167,17 +188,17 @@
     "fillOpacity": 1
   }
 }
-</pre>
-                <h5>Single Style (Image marker)</h5>
-<pre>
+</code></pre>
+                <h6>Single Style (Image marker)</h6>
+<pre><code>
 {
   "icon": "https://maps.gstatic.com/mapfiles/ms/micons/blue.png"
 }
-</pre>
+</code></pre>
               </div>
               <div class="col-sm-6">
-                <h5>Categorized Style (SVG symbols)</h5>
-<pre>
+                <h6>Categorized Style (SVG symbols)</h6>
+<pre><code>
 {
   "property": "degree_of_damage",
   "values": {
@@ -189,9 +210,9 @@
     "No Visible Damage": "#87D30F"
   }
 }
-</pre>
-                <h5>Categorized Style (Image markers)</h5>
-<pre>
+</code></pre>
+                <h6>Categorized Style (Image markers)</h6>
+<pre><code>
 {
   "property": "degree_of_damage",
   "values": {
@@ -203,53 +224,55 @@
     "No Visible Damage": "https://maps.gstatic.com/mapfiles/ms/micons/green.png"
   }
 }
-</pre>
+</code></pre>
               </div>
             </div>
           </form>
         </div>
-        <div class="col-xs-4">
-          <p><button type="button" class="btn btn-success btn-block hidden" id="preview-btn">Preview Zapmap</button></p>
-          <div class="panel panel-primary">
-            <div class="panel-heading">
-              <h3 class="panel-title">URL</h3>
+        <div class="col-4">
+          <div class="card">
+            <div class="card-header">
+              URL
             </div>
-            <div class="panel-body">
+            <div class="card-body">
               <a href="#" id="link" target="_blank"></a>
             </div>
-            <div class="panel-footer">Shorten your URL with <a href="https://goo.gl/" target="_blank">https://goo.gl/</a></div>
+            <div class="card-footer">
+              <button type="button" class="btn btn-success btn-block" id="preview-btn" disabled>Preview Zapmap</button>
+            </div>
           </div>
         </div>
       </div>
     </div>
 
     <div class="modal fade" id="preview-modal" tabindex="-1" role="dialog">
-      <div class="modal-dialog">
+      <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <button class="close" type="button" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title text-primary">Preview</h4>
+            <h5 class="modal-title text-primary">Preview</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
           </div>
           <div class="modal-body">
-            <iframe id="preview" width="100%" height="700"></iframe>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            <iframe id="preview" width="100%" height="650"></iframe>
           </div>
         </div>
       </div>
     </div>
-    <script src="assets/vendor/jquery-3.2.1.min.js"></script>
-    <script src="assets/vendor/bootstrap-3.3.7/js/bootstrap.min.js"></script>
-    <script src="assets/vendor/csv2geojson-5.0.2/csv2geojson.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js"></script>
+    <script src="https://npmcdn.com/csv2geojson@latest/csv2geojson.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.min.js"></script>
     <script>
     $("#src").on("paste", function(e) {
       var url = e.originalEvent.clipboardData.getData("text");
       var pattern = new RegExp(/^(?:(?:https?|ftp):\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,}))\.?)(?::\d{2,5})?(?:[/?#]\S*)?$/i);
       if (pattern.test(url)) {
         fetchData(url);
-        $("#preview-btn").removeClass("hidden");
+        $("#preview-btn").removeAttr("disabled");
       }
     });
 
@@ -257,16 +280,16 @@
       $("#src").popover("hide");
     });
 
-    $("#src,#icon,#title,#fields,#attribution,#sortorder,#style").on("keyup", function(e) {
+    $("#src,#icon,#title,#fields,#attribution,#where,#style").on("keyup", function(e) {
       buildLink();
     });
 
-    $("#fields,#map,#sortfield,#sortorder").on("change", function(e) {
+    $("#fields,#hidden,#hover,#map,#sort,#order").on("change", function(e) {
       buildLink();
     });
 
     // workaround to preserve tag ordering - https://github.com/select2/select2/issues/3106#issuecomment-255492815
-    $("#fields").on("select2:select", function(e) {
+    $(".allfields").on("select2:select", function(e) {
       var element = $(this).find("[value='" + e.params.data.id + "']");
       $(this).append(element);
       $(this).trigger("change");
@@ -306,16 +329,15 @@
           });
         }
       }).done(function() {
-        $("#fields").find("option").remove();
-        $("#fields").select2({
+        $(".allfields").select2({
           data: properties,
+          multiple: true,
+          tags: true,
           placeholder: "Select fields",
           closeOnSelect: true,
           theme: "bootstrap"
         })
-
-        $("#sortfield").find("option:gt(0)").remove();
-        $("#sortfield").select2({
+        $("#sort").select2({
           data: properties,
           placeholder: "Select a field",
           closeOnSelect: true,
@@ -339,17 +361,26 @@
       if ($("#fields").val() && $("#fields").val().length > 0) {
         link += "&fields=" + encodeURIComponent($("#fields").val().join())
       }
+      if ($("#hidden").val() && $("#hidden").val().length > 0) {
+        link += "&hidden=" + encodeURIComponent($("#hidden").val().join())
+      }
+      if ($("#hover").val() && $("#hover").val().length > 0) {
+        link += "&hover=" + encodeURIComponent($("#hover").val().join())
+      }
       if ($("#attribution").val()) {
         link += "&attribution=" + encodeURIComponent($("#attribution").val())
+      }
+      if ($("#where").val()) {
+        link += "&where=" + encodeURIComponent($("#where").val())
       }
       if ($("#map").val()) {
         link += "&map=" + encodeURIComponent($("#map").val())
       }
-      if ($("#sortfield").val()) {
-        link += "&sortfield=" + encodeURIComponent($("#sortfield").val())
+      if ($("#sort").val()) {
+        link += "&sort=" + encodeURIComponent($("#sort").val())
       }
-      if ($("#sortorder").val()) {
-        link += "&sortorder=" + encodeURIComponent($("#sortorder").val())
+      if ($("#order").val()) {
+        link += "&order=" + encodeURIComponent($("#order").val())
       }
       if ($("#style").val()) {
         link += "&style=" + encodeURIComponent($("#style").val())
@@ -359,15 +390,14 @@
 
     $(document).ready(function() {
       $("#src").popover("show");
-      $("#fields").attr("multiple", true);
-      $("#fields").select2({
+      $(".allfields").select2({
         data: [],
         placeholder: "Select fields",
         closeOnSelect: true,
         tags: true,
         theme: "bootstrap"
       })
-      $("#sortfield").select2({
+      $("#sort").select2({
         data: [],
         placeholder: "Select a field",
         closeOnSelect: true,
