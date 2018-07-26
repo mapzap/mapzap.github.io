@@ -453,7 +453,11 @@ var app = {
 
         if (app.urlParams.has("where")) {
           alasql("SELECT * FROM ? WHERE " + app.urlParams.get("where"), [geojson.features], function(features){
-        		geojson.features = features;
+            if (features.length > 0) {
+              geojson.features = features;
+            } else {
+              alert("Where parameter returned 0 features, showing all features!");
+            }
         	});
         }
 
