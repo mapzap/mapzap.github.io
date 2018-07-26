@@ -633,7 +633,7 @@ var app = {
 
     $(".fixed-table-toolbar button").addClass("btn-light");
     $(".search input").attr("placeholder", "Filter Data");
-    $(".fixed-table-toolbar").append("<div class='columns columns-right pull-right text-muted'><span id='feature-count'></span> / <span id='total-count'></span></div>");
+    $(".fixed-table-toolbar").append("<div class='columns columns-right pull-right text-muted d-none d-sm-block'><span id='feature-count'></span> / <span id='total-count'></span></div>");
     $("#feature-count").html(data.length);
     $("#total-count").html(data.length);
   },
