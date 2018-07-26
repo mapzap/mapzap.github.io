@@ -662,8 +662,8 @@ var app = {
 
   switchView: function(view) {
     if (view == "split") {
-      $("#table-container").show().css("height", "55%");
-      $("#map-container").show().css("height", "45%");
+      $("#table-container").show().css("height", "60%");
+      $("#map-container").show().css("height", "40%");
       $(window).resize();
     } else if (view == "map") {
       $("#map-container").show().css("height", "100%");
