@@ -30,7 +30,7 @@ var app = {
     });
 
     $(".navbar-collapse").on("hidden.bs.collapse", function () {
-      google.maps.event.trigger(map, "resize");
+      $(window).trigger("resize");
     });
   },
 
