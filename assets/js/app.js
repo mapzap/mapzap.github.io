@@ -28,6 +28,10 @@ var app = {
       app.resize();
       google.maps.event.trigger(map, "resize");
     });
+
+    $(".navbar-collapse").on("hidden.bs.collapse", function () {
+      google.maps.event.trigger(map, "resize");
+    });
   },
 
   resize: function() {
