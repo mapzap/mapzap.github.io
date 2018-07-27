@@ -29,19 +29,22 @@
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <div class="collapse navbar-collapse" id="navbar">
-        <ul class="navbar-nav ml-auto">
+      <div class="collapse navbar-collapse flex-row-reverse" id="navbar">
+        <form class="my-2 my-lg-0 ml-auto">
+          <input class="form-control mr-sm-5" type="search" id="search" placeholder="Location Search" aria-label="Location Search">
+        </form>
+        <ul class="navbar-nav">
           <li class="nav-item active">
-            <a class="nav-link" href="#" id="extent-btn" title="Zoom to Extent">Zoom</a>
+            <a class="nav-link" href="#" id="extent-btn" title="Zoom to Extent"><i class="fa fa-globe"></i> Zoom</a>
           </li>
           <li class="nav-item active" id="legend-item" hidden>
-            <a class="nav-link" href="#" id="legend-btn" title="Show Legend">Legend</a>
+            <a class="nav-link" href="#" id="legend-btn" title="Show Legend"><i class="fa fa-list-alt"></i> Legend</a>
           </li>
           <li class="nav-item active">
-            <a class="nav-link" href="#" id="download-btn" download="" title="Download Data">Download</a>
+            <a class="nav-link" href="#" id="download-btn" download="" title="Download Data"><i class="fa fa-cloud-download"></i> Download</a>
           </li>
           <li class="nav-item active dropdown mr-2">
-            <a class="nav-link dropdown-toggle" href="#" id="view-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">View</a>
+            <a class="nav-link dropdown-toggle" href="#" id="view-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-th-large"></i> View</a>
             <div class="dropdown-menu" aria-labelledby="view-dropdown">
               <a class="dropdown-item" href="#" name="view" id="split-view-btn">Split View</a>
               <a class="dropdown-item" href="#" name="view" id="map-view-btn">Map View</a>
@@ -49,9 +52,6 @@
             </div>
           </li>
         </ul>
-        <form class="my-2 my-lg-0">
-          <input class="form-control mr-sm-5" type="search" id="search" placeholder="Location Search" aria-label="Location Search">
-        </form>
       </div>
     </nav>
 
@@ -102,7 +102,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.1/bootstrap-table.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/alasql@0.4.8/dist/alasql.min.js"></script> 
+    <script src="https://cdn.jsdelivr.net/npm/alasql@0.4.8/dist/alasql.min.js"></script>
     <script src="https://npmcdn.com/csv2geojson@latest/csv2geojson.js"></script>
     <script src="https://npmcdn.com/togeojson@latest/togeojson.js"></script>
     <script src="assets/js/app.js"></script>
