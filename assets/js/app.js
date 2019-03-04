@@ -132,9 +132,10 @@ var app = {
       zoomControl: "ontouchstart" in document.documentElement ? false : true,
       mapTypeControl: true,
       mapTypeControlOptions: {
-        style: google.maps.MapTypeControlStyle.DROPDOWN_MENU,
+        // style: google.maps.MapTypeControlStyle.DROPDOWN_MENU,
         mapTypeIds: mapTypeIds
       },
+      controlSize: 28,
       mapTypeId: app.urlParams.has("map") ?app.urlParams.get("map") : "roadmap",
     });
 
@@ -304,7 +305,7 @@ var app = {
 
     var geolocationBtn = document.createElement("div");
     geolocationBtn.id = "geolocationBtn";
-    geolocationBtn.style.cssText = "background-color:#fff;border:2px solid #fff;border-radius 3px;box-shadow:rgba(0,0,0,0.298039) 0 1px 4px -1px;margin-right:10px;cursor:pointer;border-radius:2px;padding:3px;";
+    geolocationBtn.style.cssText = "background-color:#fff;border:2px solid #fff;border-radius 3px;box-shadow:rgba(0,0,0,0.298039) 0 1px 4px -1px;margin-right:7px;cursor:pointer;border-radius:2px;padding:3px;";
     geolocationBtn.index = 1;
 
     var geolocationIcon = document.createElement("div");
