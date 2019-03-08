@@ -10,9 +10,9 @@
   <meta name="description" content="Mapzap - Build a responsive Maps App without having to write any code!">
   <meta name="author" content="Bryan McBride">
   <title name="title">Mapzap</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.1/bootstrap-table.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
+  <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.14.1/dist/bootstrap-table.min.css">
   <link rel="stylesheet" href="assets/css/app.css">
   <link rel="icon" type="image/x-icon" name="icon" href="assets/img/favicon.ico">
   <link rel="icon" sizes="196x196" name="icon" href="assets/img/favicon-196.png">
@@ -41,7 +41,7 @@
             <a class="nav-link" href="#" id="legend-btn" title="Show Legend"><i class="fa fa-list-alt"></i> Legend</a>
           </li>
           <li class="nav-item active">
-            <a class="nav-link" href="#" id="download-btn" download="" title="Download Data"><i class="fa fa-cloud-download"></i> Download</a>
+            <a class="nav-link" href="#" id="download-btn" download="" title="Download Data"><i class="fa fa-cloud-download-alt"></i> Download</a>
           </li>
           <li class="nav-item active dropdown mr-2">
             <a class="nav-link dropdown-toggle" href="#" id="view-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-th-large"></i> View</a>
@@ -61,6 +61,9 @@
     </div>
 
     <div id="table-container">
+      <div id="toolbar" style="line-height: 35px;">
+        <span id="feature-count"></span> / <span id="total-count"></span>
+      </div>
       <table id="table"></table>
     </div>
 
@@ -76,7 +79,7 @@
           <div class="modal-body" id="feature-info"></div>
           <div class="modal-footer d-flex justify-content-between">
             <input type="text" id="url-input" class="w-100" readonly onfocus="this.select();">
-            <button type="button" class="btn btn-primary" id="copy-url-btn">Copy Direct Link</button>
+            <button type="button" class="btn btn-primary" id="copy-url-btn" style="white-space: nowrap;">Copy Link</button>
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           </div>
         </div>
@@ -99,9 +102,9 @@
 
     <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyBD-VYZnlbtRVWB7iFXDovJn4nIg7cQ-tI"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.1/bootstrap-table.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/bootstrap-table@1.14.1/dist/bootstrap-table.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/alasql@0.4.8/dist/alasql.min.js"></script>
     <script src="https://npmcdn.com/csv2geojson@latest/csv2geojson.js"></script>
     <script src="https://npmcdn.com/togeojson@latest/togeojson.js"></script>

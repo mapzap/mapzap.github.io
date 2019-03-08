@@ -52,8 +52,10 @@ html, body {
   padding-top: 5px;
   cursor: pointer;
 }
-.fixed-table-toolbar .columns {
-  margin-left: 2px;
+.bootstrap-table .fixed-table-toolbar .bs-bars, .bootstrap-table .fixed-table-toolbar .search, .bootstrap-table .fixed-table-toolbar .columns {
+  position: relative;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 .navbar .navbar-brand {
   font-weight: bold;
