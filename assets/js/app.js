@@ -135,7 +135,7 @@ var app = {
         style: google.maps.MapTypeControlStyle.DROPDOWN_MENU,
         mapTypeIds: mapTypeIds
       },
-      // controlSize: 28,
+      controlSize: 28,
       mapTypeId: app.urlParams.has("map") ? app.urlParams.get("map") : "roadmap",
     });
 
@@ -305,12 +305,12 @@ var app = {
 
     var geolocationBtn = document.createElement("div");
     geolocationBtn.id = "geolocationBtn";
-    geolocationBtn.style.cssText = "background-color:#fff;border:2px solid #fff;border-radius 3px;box-shadow:rgba(0,0,0,0.3) 0px 1px 4px -1px;margin-right:10px;cursor:pointer;border-radius:2px;padding:3px;";
+    geolocationBtn.style.cssText = "background-color:#fff;border:2px solid #fff;border-radius 3px;box-shadow:rgba(0,0,0,0.3) 0px 1px 4px -1px;margin-right:7px;cursor:pointer;border-radius:2px;padding:3px;";
     geolocationBtn.index = 1;
 
     var geolocationIcon = document.createElement("div");
     geolocationIcon.id = "geolocationIcon";
-    geolocationIcon.style.cssText = "background-size:60px 30px;width:30px;height:30px;opacity:0.9;background-image:url(assets/img/geolocation.png);";
+    geolocationIcon.style.cssText = "background-size:36px 18px;width:18px;height:18px;opacity:0.9;background-image:url(assets/img/geolocation.png);";
 
     geolocationBtn.appendChild(geolocationIcon);
 
@@ -324,7 +324,7 @@ var app = {
         } else {
           locationMarker.setVisible(true);
           locationCircle.setVisible(true);
-          geolocationIcon.style.backgroundPosition = "-30px";
+          geolocationIcon.style.backgroundPosition = "-18px";
           navigator.geolocation.getCurrentPosition(function(position){
             locationUpdate(position);
             app.map.fitBounds(locationCircle.getBounds());

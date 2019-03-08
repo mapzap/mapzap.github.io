@@ -52,6 +52,9 @@ html, body {
   padding-top: 5px;
   cursor: pointer;
 }
+.gm-style-mtc div {
+  font-size: 12px !important;
+}
 .bootstrap-table .fixed-table-toolbar .bs-bars, .bootstrap-table .fixed-table-toolbar .search, .bootstrap-table .fixed-table-toolbar .columns {
   position: relative;
   margin-top: 5px;
