@@ -154,6 +154,11 @@ var app = {
     OSMattribution.style.display = "none";
     app.map.controls[google.maps.ControlPosition.BOTTOM_RIGHT].push(OSMattribution);
 
+    app.markerCluster = new MarkerClusterer(app.map, null, {
+      imagePath: "assets/vendor/js-marker-clusterer/images/m",
+      maxZoom: 16
+    });
+
     app.selectedFeature = new google.maps.Data({
       map: app.map,
       style: {
@@ -173,6 +178,10 @@ var app = {
         }
       }
     });
+
+    if (app.urlParams.has("cluster") && (app.urlParams.get("cluster") == "true" || app.urlParams.get("cluster") == "1")) {
+      app.map.data.setMap(null);
+    }
 
     app.map.addListener("click", function(event) {
       $("input").blur();
@@ -381,6 +390,53 @@ var app = {
     $("#url-input").val(link);
   },
 
+  addMarkerToCluster: function(feature) {
+    if (app.urlParams.has("style")) {
+      var style = JSON.parse(app.urlParams.get("style"));
+
+      if (style.property && style.values) {
+        var value = feature.getProperty(style.property);
+        style.icon = (style.values[value] && style.values[value].startsWith("http")) ? style.values[value] : {
+          path: google.maps.SymbolPath.CIRCLE,
+          scale: 5,
+          strokeColor: "white",
+          strokeWeight: 1,
+          fillColor: style.values[value] ? style.values[value] : "black",
+          fillOpacity: 0.9
+        };
+      }
+    }
+    
+    var marker = new google.maps.Marker({
+      position: feature.getGeometry().get(),
+      icon: style.icon
+    });
+
+    app.markerCluster.addMarker(marker);
+    
+    google.maps.event.addListener(marker, "click", function(event) {
+      app.clickFeature(feature);
+    });
+    
+    google.maps.event.addListener(marker, "mouseover", function(event) {
+      if (app.urlParams.has("hover")) {
+        var fields = app.urlParams.get("hover").split(",");
+        var value = fields.map(function(field) {
+          return feature.getProperty(field);
+        });
+        $("#info-box").html(value.join(" | "));
+        $("#info-box").show();
+      } else {
+        $("#info-box").hide();
+      }
+    });
+
+    google.maps.event.addListener(marker, "mouseout", function(event) {
+      $("#info-box").html("");
+      $("#info-box").hide();
+    });
+  },
+
   selectFeature: function(feature){
     feature.toGeoJson(function(geojson){
       app.selectedFeature.forEach(function(feature) {
@@ -547,6 +603,9 @@ var app = {
         if (feature.getGeometry()) {
           feature.getGeometry().forEachLatLng(function(latLng){
             app.bounds.extend(latLng);
+            if (feature.getGeometry().getType() == "Point" && app.urlParams.has("cluster") && (app.urlParams.get("cluster") == "true" || app.urlParams.get("cluster") == "1")) {
+              app.addMarkerToCluster(feature);
+            }
           });
         }
       });
@@ -620,6 +679,7 @@ var app = {
           return (feature._id_);
         });
         app.bounds = new google.maps.LatLngBounds();
+        app.markerCluster.clearMarkers();
         app.map.data.forEach(function(feature) {
           if ($.inArray(feature.getId(), visibleIDs) == -1) {
             app.map.data.overrideStyle(feature, {
@@ -632,6 +692,9 @@ var app = {
             if (feature.getGeometry()) {
               feature.getGeometry().forEachLatLng(function(latLng){
                 app.bounds.extend(latLng);
+                if (feature.getGeometry().getType() == "Point" && app.urlParams.has("cluster") && (app.urlParams.get("cluster") == "true" || app.urlParams.get("cluster") == "1")) {
+                  app.addMarkerToCluster(feature);
+                }
               });
             }
           }
