@@ -133,7 +133,7 @@
                   <small class="form-text text-muted">Source attribution added to text in bottom right of map</small>
                 </div>
               </div>
-              <div class="col-sm-6">
+              <div class="col-sm-3">
                 <div class="form-group">
                   <label for="map">Map</label>
                   <select class="form-control" id="map">
@@ -143,6 +143,16 @@
                     <option value="terrain">Terrain</option>
                   </select>
                   <small class="form-text text-muted">Initial Google map type</small>
+                </div>
+              </div>
+              <div class="col-sm-3">
+                <div class="form-group">
+                  <label for="cluster">Clustering</label>
+                  <select class="form-control" id="cluster">
+                    <option value="false" selected>False</option>
+                    <option value="true">True</option>
+                  </select>
+                  <small class="form-text text-muted">Cluster points</small>
                 </div>
               </div>
             </div>
@@ -276,7 +286,7 @@
       buildLink();
     });
 
-    $("#fields,#hidden,#hover,#map,#sort,#order").on("change", function(e) {
+    $("#fields,#hidden,#hover,#map,#cluster,#sort,#order").on("change", function(e) {
       buildLink();
     });
 
@@ -367,6 +377,9 @@
       }
       if ($("#map").val()) {
         link += "&map=" + encodeURIComponent($("#map").val())
+      }
+      if ($("#cluster").val()) {
+        link += "&cluster=" + encodeURIComponent($("#cluster").val())
       }
       if ($("#sort").val()) {
         link += "&sort=" + encodeURIComponent($("#sort").val())
