@@ -409,7 +409,7 @@ var app = {
     
     var marker = new google.maps.Marker({
       position: feature.getGeometry().get(),
-      icon: style.icon
+      icon: (style && style.icon) ? style.icon : ""
     });
 
     app.markerCluster.addMarker(marker);
