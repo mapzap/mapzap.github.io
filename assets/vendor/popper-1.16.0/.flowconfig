@@ -1,0 +1,14 @@
+[declarations]
+<PROJECT_ROOT>/node_modules
+<PROJECT_ROOT>/lib
+<PROJECT_ROOT>/dist
+
+[ignore]
+<PROJECT_ROOT>/docs/public
+<PROJECT_ROOT>/docs/.cache
+
+[options]
+suppress_comment= \\(.\\|\n\\)*\\$FlowExpectError
+suppress_comment= \\(.\\|\n\\)*\\$FlowFixMe
+suppress_comment= \\(.\\|\n\\)*\\$FlowIgnore
+

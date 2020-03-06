@@ -490,7 +490,7 @@ var app = {
       type: "GET",
       url: src,
       success: function(geojson, status, xhr) {
-        if (app.urlParams.get("src").endsWith(".geojson") ||app.urlParams.get("f") == "geojson") {
+        if (app.urlParams.get("src").endsWith(".geojson") || app.urlParams.get("f") == "geojson") {
           if (typeof geojson == "string") {
             try {
               JSON.parse(geojson);

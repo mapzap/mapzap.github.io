@@ -1,0 +1,46 @@
+dist: bionic
+language: node_js
+node_js: 12
+cache:
+  yarn: true
+  directories:
+    - node_modules
+    - docs/.cache
+    - docs/node_modules
+    - docs/public
+
+jobs:
+  include:
+    - stage: Tests & Code Check
+      name: Flow Type
+      script: yarn test:flow
+
+    - stage: Tests & Code Check
+      name: ESLint
+      script: yarn test:eslint
+
+    - stage: Tests & Code Check
+      name: TypeScript
+      before_script: yarn build:typescript
+      script: yarn test:typescript
+
+    - stage: Tests & Code Check
+      name: Unit Tests
+      before_script: NODE_ENV=development yarn build:bundles
+      script: yarn test:unit
+
+    - stage: Tests & Code Check
+      name: '[Chrome] Functional Tests'
+      script: PUPPETEER_BROWSER=chromium travis_retry yarn test:functional
+
+    #- name: '[Firefox] Functional Tests'
+    #  script: PUPPETEER_BROWSER=firefox travis_retry yarn jest tests/functional
+
+    - stage: Deploy
+      name: Website / Documentation
+      if: '(NOT type IN (pull_request)) AND (branch = master)'
+      script:
+        - yarn build
+        - cd docs
+        - yarn install
+        - yarn deploy
