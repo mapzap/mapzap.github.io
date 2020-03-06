@@ -179,10 +179,6 @@ var app = {
       }
     });
 
-    if (app.urlParams.has("cluster") && (app.urlParams.get("cluster") == "true" || app.urlParams.get("cluster") == "1")) {
-      app.map.data.setMap(null);
-    }
-
     app.map.addListener("click", function(event) {
       $("input").blur();
       app.selectedFeature.forEach(function(feature) {
@@ -391,6 +387,10 @@ var app = {
   },
 
   addMarkerToCluster: function(feature) {
+    app.map.data.overrideStyle(feature, {
+      visible: false
+    });
+    
     if (app.urlParams.has("style")) {
       var style = JSON.parse(app.urlParams.get("style"));
 
