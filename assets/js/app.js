@@ -512,16 +512,6 @@ var app = {
           geojson = toGeoJSON.gpx((new DOMParser()).parseFromString(geojson, "text/xml"));
         }
 
-        if (app.urlParams.has("where")) {
-          alasql("SELECT * FROM ? WHERE " + app.urlParams.get("where"), [geojson.features], function(features){
-            if (features.length > 0) {
-              geojson.features = features;
-            } else {
-              alert("Where parameter returned 0 features, showing all features!");
-            }
-        	});
-        }
-
         $.each(geojson.features, function(index, feature) {
           feature.id = index+1;
           feature.properties._id_ = index+1;
